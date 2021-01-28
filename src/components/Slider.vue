@@ -62,7 +62,7 @@ export default {
   },
   created() {
     this.autoPlayTimer = setInterval(
-      this.slideImage.bind(this),
+      this.slideImage,
       this.period * 1000
     );
   },
