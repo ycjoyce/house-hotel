@@ -1,38 +1,73 @@
 <template>
-  <ul class="slider">
-    <slot></slot>
-
-    <slider-dots :amount="images.length"/>
-
-    <li
-      v-for="(image, index) in images"
-      :key="'image-' + index"
-      class="slider-img"
+  <div class="slider-container">
+    <ul
+      class="slider"
+      :style="{ transform: `translateX(-${sliderIndex * 100}%)` }"
     >
-      <img
-        :src="image"
-        class="bg-img"
+      <slot></slot>
+
+      <li
+        v-for="(image, index) in images"
+        :key="'image-' + index"
+        class="slider-img-box"
       >
-    </li>
-  </ul>
+        <img
+          :src="image"
+          class="slider-img"
+        >
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
-import SliderDots from '@src/components/SliderDots.vue';
-
 export default {
-  components: {
-    SliderDots,
-  },
   props: {
     images: {
       type: Array,
       required: true,
     },
+    period: {
+      type: Number,
+      required: false,
+      default() {
+        return 5;
+      },
+    },
+    id: {
+      type: Number,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      curIndex: 0,
+      autoPlayTimer: null,
+    };
+  },
+  computed: {
+    sliderIndex() {
+      return this.$store.getters.sliderIndex(this.id);
+    },
+  },
+  methods: {
+    slideImage() {
+      let sendIndex = (this.sliderIndex <= this.images.length - 2) ? this.sliderIndex + 1 : 0;
+      
+      this.$store.commit('setSliderIndex', {
+        id: this.id,
+        index: sendIndex,
+      });
+    },
+  },
+  created() {
+    this.autoPlayTimer = setInterval(
+      this.slideImage.bind(this),
+      this.period * 1000
+    );
+  },
+  beforeDestroy() {
+    clearInterval(this.autoPlayTimer);
   },
 }
 </script>
-
-<style>
-
-</style>

@@ -1,12 +1,26 @@
 <template>
-  <slider :images="sliderImages">
-    <hotel-info/>
+  <div class="flex-container">
+    <hotel-info
+      class="flex-aside-sm"
+      :slider="{
+        id: sliderId,
+        amount: sliderImages.length,
+      }"
+    />
 
     <room-cards
+      class="flex-main"
       v-if="allRooms"
       :rooms="allRooms"
     />
-  </slider>
+
+    <slider
+      :images="sliderImages"
+      :period="5"
+      :id="sliderId"
+      class="pos-index"
+    ></slider>
+  </div>
 </template>
 
 <script>
@@ -31,12 +45,23 @@ export default {
         require('@img/house-3.jpeg'),
         require('@img/house-4.jpeg'),
       ],
+      sliderId: new Date().getTime(),
     };
+  },
+  methods: {
+    initSlider() {
+      this.$store.commit('setSliderIndex', {
+        id: this.sliderId,
+        index: 0,
+      });
+    },
   },
   created() {
     getAllRooms().then((res) => {
       this.allRooms = res.data.items;
     });
+
+    this.initSlider();
   },
 }
 </script>

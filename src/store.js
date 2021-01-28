@@ -11,6 +11,15 @@ const store = new Vuex.Store({
       start: null,
       end: null,
     },
+    sliderIndex: [],
+  },
+  getters: {
+    sliderIndex(state) {
+      return (id) => {
+        const targetIndex = state.sliderIndex.findIndex((item) => item.id === id);
+        return state.sliderIndex[targetIndex].index;
+      };
+    },
   },
   mutations: {
     setCurRoomDetail(state, data) {
@@ -33,6 +42,14 @@ const store = new Vuex.Store({
         state.selectDate.start = date;
       } else {
         state.selectDate.end = null;
+      }
+    },
+    setSliderIndex(state, data) {
+      const existIndex = state.sliderIndex.findIndex((item) => item.id === data.id);
+      if (existIndex > -1) {
+        state.sliderIndex.splice(existIndex, 1, data);
+      } else {
+        state.sliderIndex.push(data);
       }
     },
   },
