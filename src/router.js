@@ -14,6 +14,11 @@ const routes = [
   {
     path: '/room-intro',
     component: RoomIntro,
+    children: [
+      {
+        path: ':id',
+      },
+    ],
   },
 ];
 

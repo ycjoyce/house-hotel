@@ -1,8 +1,7 @@
 <template>
   <aside>
-    <slider>
       <img
-        src=""
+        :src="hotelLogo"
         alt="好室House Hotel"
         class="hotel-logo"
       >
@@ -24,20 +23,14 @@
           HOUSE@HOTEL.COM
         </li>
       </ul>  
-    </slider>
   </aside>
 </template>
 
 <script>
-import Slider from '@src/components/Slider.vue';
-
 export default {
-  components: {
-    Slider,
-  },
-  provide() {
+  data() {
     return {
-      sliderAmount: 4,
+      hotelLogo: require('@img/house-logo.svg'),
     };
   },
 }

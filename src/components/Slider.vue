@@ -2,9 +2,18 @@
   <ul class="slider">
     <slot></slot>
 
-    <slider-dots/>
+    <slider-dots :amount="images.length"/>
 
-    <li class="slider-img"></li>
+    <li
+      v-for="(image, index) in images"
+      :key="'image-' + index"
+      class="slider-img"
+    >
+      <img
+        :src="image"
+        class="bg-img"
+      >
+    </li>
   </ul>
 </template>
 
@@ -14,6 +23,12 @@ import SliderDots from '@src/components/SliderDots.vue';
 export default {
   components: {
     SliderDots,
+  },
+  props: {
+    images: {
+      type: Array,
+      required: true,
+    },
   },
 }
 </script>

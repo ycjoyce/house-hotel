@@ -20,6 +20,7 @@ module.exports= merge(baseWebpackConfig, {
                         options: {
                             name: 'img/[name].[ext]',
                             limit: 8192,
+                            esModule: false,
                         },
                     },
                 ],
