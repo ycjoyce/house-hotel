@@ -26,6 +26,12 @@ const store = new Vuex.Store({
       state.curRoomDetail = data;
     },
     setSelectDate(state, date) {
+      if (!date) {
+        state.selectDate.start = null;
+        state.selectDate.end = null;
+        return;
+      }
+
       const selectStart = new Date(state.selectDate.start);
       const curSelect = new Date(date);
 
@@ -51,6 +57,14 @@ const store = new Vuex.Store({
       } else {
         state.sliderIndex.push(data);
       }
+    },
+  },
+  actions: {
+    initSlider({ commit }, id) {
+      commit('setSliderIndex', {
+        id,
+        index: 0,
+      });
     },
   },
 });

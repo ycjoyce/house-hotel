@@ -1,0 +1,34 @@
+.price-info {
+  position: relative;
+  color: map-get($map: $theme-color, $key: primary);
+  padding: $layout-padding;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.room-reserve {
+  align-self: stretch;
+  margin: 10px 0 40px 0;
+}
+
+.room-price {
+  &-box {
+    display: flex;
+    align-items: baseline;
+  }
+
+  &-nights {
+    &::before {
+      content: '/';
+      display: inline-block;
+      margin: 0 15px;
+    }
+  }
+}

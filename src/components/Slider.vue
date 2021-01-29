@@ -59,8 +59,16 @@ export default {
         index: sendIndex,
       });
     },
+    initSlider() {
+      this.$store.commit('setSliderIndex', {
+        id: this.sliderId,
+        index: 0,
+      });
+    },
   },
   created() {
+    this.initSlider();
+
     this.autoPlayTimer = setInterval(
       this.slideImage,
       this.period * 1000

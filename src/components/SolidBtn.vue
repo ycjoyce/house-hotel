@@ -1,5 +1,9 @@
 <template>
-  <button @click.prevent="data.method">
+  <button
+    class="btn btn-solid font-bold font-tertiary"
+    :class="'btn-solid-' + data.type"
+    @click.prevent="data.method"
+  >
     {{data.title}}
   </button>
 </template>
@@ -14,7 +18,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-</style>

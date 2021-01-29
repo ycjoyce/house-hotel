@@ -1,15 +1,15 @@
 <template>
   <div
     class="amenity-icon"
-    :class="{ available: amenity.value }"
+    :class="{ 'not-available': !amenity.value }"
   >
     <img
-      src=""
-      alt=""
+      :src="require(`@img/icon/${amenity.name}.svg`)"
+      :alt="amenity.name"
       class="amenity-img"
     >
 
-    <p class="amenity-name">
+    <p class="amenity-name font-sm">
       {{amenity.name}}
     </p>
   </div>
@@ -25,7 +25,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-</style>

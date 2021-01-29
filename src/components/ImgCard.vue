@@ -5,7 +5,7 @@
       :to="{ path: `/room-intro/${data.id}` }"
     >
       <div class="img-card-overlay">
-        <p class="img-card-title">
+        <p class="img-card-title font-tertiary">
           {{data.name}}
         </p>
       </div>

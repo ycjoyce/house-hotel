@@ -48,20 +48,12 @@ export default {
       sliderId: new Date().getTime(),
     };
   },
-  methods: {
-    initSlider() {
-      this.$store.commit('setSliderIndex', {
-        id: this.sliderId,
-        index: 0,
-      });
-    },
-  },
   created() {
     getAllRooms().then((res) => {
       this.allRooms = res.data.items;
     });
 
-    this.initSlider();
+    this.$store.dispatch('initSlider', this.sliderId);
   },
 }
 </script>

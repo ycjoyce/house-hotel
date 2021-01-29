@@ -1,0 +1,105 @@
+.calendar {
+  text-align: center;
+  font-size: map-get($map: $font-size, $key: sm);
+  line-height: map-get($map: $line-height, $key: sm);
+
+  &-title {
+    margin-bottom: 10px;
+  }
+
+  &-table {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &-box-title {
+    margin-bottom: 10px;
+  }
+
+  &-reset {
+    margin-top: 10px;
+  }
+
+  &-box {
+    padding: 20px;
+    border: 1px solid map-get($map: $theme-color, $key: primary);
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.weekday-row {
+  border-bottom: 1px solid map-get($map: $theme-color, $key: assist-light);
+}
+
+.weekday-item, .week-date-item {
+  padding: 10px;
+}
+
+.weekday-item {
+  color: $opacity-color-primary;
+}
+
+.week-date-item {
+  cursor: pointer;
+
+  &.disabled {
+    cursor: not-allowed;
+    text-decoration: line-through;
+    opacity: .3;
+  }
+
+  &.empty {
+    cursor: default;
+    opacity: 1;
+    background-color: #fff;
+  }
+
+  &.start, &.end {
+    color: #fff;
+    font-weight: 600;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: inine-block;
+      height: 30px;
+      width: 30px;
+      border-radius: 100%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+  }
+
+  &.middle {
+    background-color: map-get($map: $theme-color, $key: assist-light);
+    position: relative;
+    
+    $extend: (
+      before: left,
+      after: right
+    );
+
+    @each $key, $value in $extend {
+      &::#{$key} {
+        @extend %middle-td;
+        #{$value}: -50%;
+      }
+    }
+  }
+
+  &.start {
+    &::after {
+      background-color: map-get($map: $theme-color, $key: primary);
+    }
+  }
+
+  &.end {
+    &::after {
+      background-color: map-get($map: $theme-color, $key: secondary);
+    }
+  }
+}

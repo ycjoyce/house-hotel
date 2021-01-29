@@ -1,0 +1,10 @@
+.styled-list-item {
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    margin-right: 10px;
+    @include dot(3px, map-get($map: $theme-color, $key: primary));
+  }
+}

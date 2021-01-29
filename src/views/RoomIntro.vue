@@ -1,9 +1,12 @@
 <template>
-  <div>
-    <reserve-pop/>
-    <light-box/>
-    <price-info/>
-    <room-detail/>
+  <div class="flex-container">
+    <reserve-pop v-show="false"/>
+
+    <light-box v-show="false"/>
+
+    <price-info class="flex-aside-lg"/>
+
+    <room-detail class="flex-main"/>
   </div>
 </template>
 
@@ -36,7 +39,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-</style>

@@ -1,10 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Open+Sans:wght@300;400;600;700;800&display=swap');
 
-*, *::before, *::after {
-  font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
-  line-height: 1.5rem;
+html {
+  font-size: 14px;
 }
 
-.font-light {
-  font-weight: lighter;
+body, *, *::before, *::after {
+  font-family: 'Open Sans', 'Noto Sans TC', sans-serif !important;
+  line-height: map-get($map: $line-height, $key: normal);
+}
+
+.font {
+  &-light {
+    font-weight: lighter;
+  }
+
+  &-bold {
+    font-weight: 600;
+  }
+
+  @each $key, $value in $font-size {
+    &-#{$key} {
+      font-size: $value !important;
+      line-height: map-get($map: $line-height, $key: $key) !important;
+    }
+  }
 }

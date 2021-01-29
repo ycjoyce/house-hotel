@@ -1,25 +1,28 @@
 <template>
-  <main v-if="$store.state.curRoomDetail">
-    <div class="room-type">
-      <h1 class="room-type-name">
+  <main
+    class="room-detail"
+    v-if="$store.state.curRoomDetail"
+  >
+    <div class="room-detail-type">
+      <h1 class="font-primary">
         {{roomName}}
       </h1>
 
-      <p class="room-type-desc">
+      <p>
         {{roomDesc}}
       </p>
     </div>
 
     <ul class="room-basic-list">
-      <li class="room-basic-item">
+      <li>
         平日（一～四）價格：{{normalDayPrice}}  /  假日（五〜日）價格：{{holidayPrice}}
       </li>
 
-      <li class="room-basic-item">
+      <li>
         入住時間：{{checkInAndOut.checkInEarly}}（最早） /  {{checkInAndOut.checkInLate}}（最晚）
       </li>
 
-      <li class="room-basic-item">
+      <li>
         退房時間：{{checkInAndOut.checkOut}}
       </li>
     </ul>
@@ -28,7 +31,7 @@
       <li
         v-for="(intro, index) in roomIntro"
         :key="'intro-' + index"
-        class="room-intro-item"
+        class="styled-list-item"
       >
         {{intro}}
       </li>
@@ -97,7 +100,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-</style>

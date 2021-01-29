@@ -1,0 +1,38 @@
+@mixin slider-bg-overlay($overlay) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+
+  &::before {
+    content: '';
+    z-index: 2;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $overlay;
+  }
+}
+
+@mixin arrow($direction, $color, $size: 10px, $bold: 1px) {
+  display: inline-block;
+  width: $size;
+  height: $size;
+  border-top: $bold solid $color;
+  border-left: $bold solid $color;
+  transform: rotate(-45deg);
+  @if $direction == left {
+    transform: rotate(-45deg);
+  } @else {
+    transform: rotate(135deg);
+  }
+}
+
+@mixin dot($size, $color) {
+  display: inline-block;
+  width: $size;
+  height: $size;
+  border-radius: 100%;
+  background-color: $color;
+}

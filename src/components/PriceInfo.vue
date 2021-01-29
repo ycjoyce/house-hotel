@@ -1,35 +1,64 @@
 <template>
-  <aside v-if="$store.state.curRoomDetail">
-    <slider :images="sliderImages">
-      <router-link
-        :to="{ path: '/' }"
-        class="btn btn-pure btn-primary btn-back"
-      >
-        查看其他房型
-      </router-link>
+  <aside
+    v-if="$store.state.curRoomDetail"
+    class="price-info"
+  >
+    <router-link
+      :to="{ path: '/' }"
+      class="btn btn-pure btn-pure-primary btn-back"
+    >
+      查看其他房型
+    </router-link>
 
-      <p class="room-price">
-        ${{totalPrice}} / {{totalNights}}晚 
-      </p>
+    <div class="price-info-main">
+      <div class="room-price-box">
+        <p class="room-price font-secondary">
+          ${{formatNum(totalPrice)}}
+        </p>
+        
+        <p class="room-price-nights font-tertiary">
+          {{totalNights}}晚
+        </p>
+      </div>
 
-      <solid-btn :data="bookingBtn"></solid-btn>
-    </slider>
+      <solid-btn
+        :data="bookingBtn"
+        class="room-reserve"
+      ></solid-btn>
+
+      <slider-dots
+        :id="sliderId"
+        :amount="sliderImages.length"
+        class="colored"
+      />
+    </div>
+    
+    <slider
+      :images="sliderImages"
+      :period="5"
+      :id="sliderId"
+      class="pos-intro"
+    ></slider>
   </aside>
 </template>
 
 <script>
 import Slider from '@src/components/Slider.vue';
+import SliderDots from '@src/components/SliderDots.vue';
 import SolidBtn from '@src/components/SolidBtn.vue';
 
 export default {
   components: {
     Slider,
+    SliderDots,
     SolidBtn,
   },
   data() {
     return {
+      sliderId: new Date().getTime(),
       bookingBtn: {
         title: 'Booking now',
+        type: 'primary',
         method() {
           console.log('hi');
         },
@@ -103,10 +132,18 @@ export default {
         return [0, 5, 6].includes(day) ? 'holiday' : 'normal';
       };
     },
+    formatNum() {
+      return (num) => {
+        let arrNum = `${num}`.split('').reverse();
+        for (let i = 2; i < arrNum.length; i += 4) {
+          arrNum.splice(i + 1 , 0, ',');
+        }
+        return arrNum.reverse().join('');
+      };
+    },
+  },
+  created() {
+    this.$store.dispatch('initSlider', this.sliderId);
   },
 }
 </script>
-
-<style>
-
-</style>

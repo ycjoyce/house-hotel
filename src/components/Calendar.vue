@@ -1,15 +1,15 @@
 <template>
   <div class="calendar">
-    <p class="calendar-title">
+    <p class="calendar-title font-bold">
       {{monthMap[month]}} {{year}}
     </p>
 
-    <table>
+    <table class="calendar-table">
       <tr class="weekday-row">
         <th
           v-for="(day, index) in weekday"
           :key="'day-' + index"
-          class="weekday-item"
+          class="weekday-item font-bold"
         >
           {{day}}
         </th>
@@ -23,11 +23,16 @@
         <td
           class="week-date-item"
           :class="{ 
-            disabled: hasPassed(`${year}/${month}/${calDate(weekNo, dateNo - 1)}`) ||
-                      exceedLimit(`${year}/${month}/${calDate(weekNo, dateNo - 1)}`),
+            disabled: hasPassed(dateStr(weekNo, dateNo - 1)) ||
+                      exceedLimit(dateStr(weekNo, dateNo - 1)) ||
+                      !calDate(weekNo, dateNo - 1),
+            empty: !calDate(weekNo, dateNo - 1),
+            start: $store.state.selectDate.start === dateStr(weekNo, dateNo - 1),
+            end: $store.state.selectDate.end === dateStr(weekNo, dateNo - 1),
+            middle: calMiddle(weekNo, dateNo - 1),
           }"
           v-for="dateNo in 7"
-          :key="dateNo"
+          :key="'date-' + dateNo"
           @click="setSelectDate(`${year}/${month}/${calDate(weekNo, dateNo - 1)}`)"
         >
           {{calDate(weekNo, dateNo - 1)}}
@@ -81,6 +86,9 @@ export default {
   computed: {
     selectedDateStart() {
       return this.$store.state.selectDate.start;
+    },
+    selectedDateEnd() {
+      return this.$store.state.selectDate.end;
     },
     monthLength() {
       let length;
@@ -146,6 +154,19 @@ export default {
         return days > this.limitDays;
       };
     },
+    dateStr() {
+      return (week, date) => (
+        `${this.year}/${this.month}/${this.calDate(week, date)}`
+      );
+    },
+    calMiddle() {
+      return (week, date) => {
+        const targetDay = new Date(this.dateStr(week, date));
+        const startDay = new Date(this.selectedDateStart);
+        const endDay = new Date(this.selectedDateEnd);
+        return targetDay > startDay && targetDay < endDay;
+      };
+    },
   },
   methods: {
     setSelectDate(date) {
@@ -157,9 +178,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-  .disabled {
-    background-color: yellow;
-  }
-</style>

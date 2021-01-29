@@ -2,7 +2,7 @@
   <div class="calendar-container">
     <p
       v-if="config.title"
-      class="calendar-title"
+      class="calendar-box-title"
     >
       {{config.title}}
     </p>
@@ -11,7 +11,7 @@
       <button
         class="btn btn-pure btn-prev"
         @click="changeCalendar('prev')"
-      >prev</button>
+      ></button>
       
       <calendar
         :month="showDate.month"
@@ -26,12 +26,13 @@
       <button
         class="btn btn-pure btn-next"
         @click="changeCalendar('next')"
-      >next</button>
+      ></button>
     </div>
 
     <button
       v-if="config.reset"
-      class="btn btn-pure btn-secondary"
+      class="calendar-reset btn btn-pure btn-pure-secondary"
+      @click="resetCalendar"
     >
       重新選取
     </button>
@@ -92,6 +93,9 @@ export default {
         default:
           break;
       }
+    },
+    resetCalendar() {
+      this.$store.commit('setSelectDate', null);
     },
   },
   created() {

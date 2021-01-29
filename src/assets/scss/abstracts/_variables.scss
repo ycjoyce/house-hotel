@@ -1,5 +1,7 @@
 $window-width: 1200px;
 $layout-padding: 60px;
+$section-gap: 40px;
+$amenity-icon-size: 40px;
 
 $theme-color: (
   secondary: #949C7C,
@@ -9,3 +11,18 @@ $theme-color: (
 );
 
 $opacity-color-primary:  #38470b99;
+
+$font-size: (
+  sm: 0.85rem,
+  primary: 2.85rem,
+  secondary: 2.6rem,
+  tertiary: 1.4rem
+);
+
+$line-height: (
+  normal: 1.7rem,
+  sm: 1.1rem,
+  primary: 4rem,
+  secondary: 4rem,
+  tertiary: 2rem
+);

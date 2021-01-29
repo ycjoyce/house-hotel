@@ -1,0 +1,52 @@
+.btn {
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  line-height: map-get($map: $line-height, $key: normal);
+
+  $types: primary secondary;
+
+  &-pure {
+    background-color: transparent;
+
+    @each $key in $types {
+      &-#{$key} {
+        color: map-get($map: $theme-color, $key: #{$key});
+      }
+    }
+  }
+
+  &-solid {
+    color: #fff;
+    padding: 10px;
+
+    @each $key in $types {
+      &-#{$key} {
+        background-color: map-get($map: $theme-color, $key: #{$key});
+      }
+    }
+  }
+
+  &-back {
+    vertical-align: middle;
+    
+    &::before {
+      content: '';
+      @include arrow(left, map-get($map: $theme-color, $key: primary));
+      margin-right: 5px;
+    }
+  }
+
+  $directions: (
+    prev: left,
+    next: right
+  );
+
+  @each $key, $value in $directions {
+    &-#{$key} {
+      @include arrow(#{$value}, $opacity-color-primary);
+    }
+  }
+}
