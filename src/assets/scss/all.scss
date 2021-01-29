@@ -1,4 +1,5 @@
 @import '@src/assets/scss/abstracts/_variables.scss';
+@import '@src/assets/scss/abstracts/_placeholder.scss';
 
 @import '@src/assets/scss/base/_base.scss';
 @import '@src/assets/scss/base/_reset.scss';
@@ -6,5 +7,7 @@
 
 @import '@src/assets/scss/components/_slider.scss';
 @import '@src/assets/scss/components/_hotel-info.scss';
+@import '@src/assets/scss/components/_room-card.scss';
+@import '@src/assets/scss/components/_img-card.scss';
 
 @import '@src/assets/scss/layout/_flex-container.scss';

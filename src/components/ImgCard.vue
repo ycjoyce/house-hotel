@@ -1,8 +1,11 @@
 <template>
   <div class="img-card">
-    <router-link :to="{ path: `/room-intro/${data.id}` }">
-      <div class="overlay">
-        <p class="card-title">
+    <router-link
+      class="img-card-link"
+      :to="{ path: `/room-intro/${data.id}` }"
+    >
+      <div class="img-card-overlay">
+        <p class="img-card-title">
           {{data.name}}
         </p>
       </div>
@@ -10,7 +13,7 @@
       <img
         :src="data.imageUrl"
         :alt="data.name"
-        class="bg-img"
+        class="img-card-bg"
       >
     </router-link>
   </div>

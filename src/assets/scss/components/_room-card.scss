@@ -1,0 +1,16 @@
+.room-cards-container {
+  display: flex;
+  flex-direction: column;
+  padding: $layout-padding;
+  height: 100%;
+  justify-content: center;
+}
+
+.room-cards-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.room-card {
+  width: percentage(1/3);
+}
