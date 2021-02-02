@@ -1,0 +1,28 @@
+.edit-panel {
+  .form-control {
+    display: block;
+    margin-bottom: $edit-panel-gap;
+  }
+}
+
+.edit-cal-dates {
+  color: map-get($map: $theme-color, $key: secondary);
+  padding-bottom: $edit-panel-gap;
+  margin-bottom: $edit-panel-gap;
+  border-bottom: 1px solid map-get($map: $theme-color, $key: secondary);
+}
+
+.edit-cal-price {
+  &-box {
+    text-align: right;
+  }
+}
+
+.edit-submit {
+  width: 100%;
+  margin: $edit-panel-gap 0;
+}
+
+.explaination-item {
+  text-align: center;
+}

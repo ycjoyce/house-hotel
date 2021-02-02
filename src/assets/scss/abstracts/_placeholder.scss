@@ -15,3 +15,15 @@
   top: 0;
   z-index: -2;
 }
+
+%modal-layout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-width: $window-width;
+  height: 100vh;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+}

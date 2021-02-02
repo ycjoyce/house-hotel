@@ -2,24 +2,26 @@
   <div
     v-if="$store.state.curRoomDetail"
     class="light-box"
+    @click.self="closeLightBox"
   >
     <button
-      class="btn btn-pure btn-prev"
+      class="btn btn-pure btn-prev light-box-prev"
       @click="changeImg('prev')"
       :disabled="curIndex === 0"
-    >prev</button>
+    ></button>
 
     <div class="light-box-inner">
       <img
+        class="light-box-img"
         :src="roomImages[curIndex]"
       >
     </div>
 
     <button
-      class="btn btn-pure btn-next"
+      class="btn btn-pure btn-next light-box-next"
       @click="changeImg('next')"
       :disabled="curIndex === roomImages.length - 1"
-    >next</button>
+    ></button>
   </div>
 </template>
 
@@ -48,10 +50,12 @@ export default {
           break;
       }
     },
+    closeLightBox() {
+      this.$store.commit('toggleModalStatus', {
+        type: 'lightBox',
+        status: false,
+      });
+    },
   },
 }
 </script>
-
-<style>
-
-</style>

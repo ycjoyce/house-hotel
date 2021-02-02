@@ -36,3 +36,23 @@
   border-radius: 100%;
   background-color: $color;
 }
+
+@mixin cross($bold, $color) {
+  text-align: center;
+
+  &::before, &::after {
+    content: '';
+    display: inline-block;
+    width: $bold;
+    height: 100%;
+    background-color: $color;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}

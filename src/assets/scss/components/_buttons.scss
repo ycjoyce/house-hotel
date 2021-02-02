@@ -49,4 +49,8 @@
       @include arrow(#{$value}, $opacity-color-primary);
     }
   }
+
+  &-close {
+    @include cross(1px, map-get($theme-color, primary));
+  }
 }

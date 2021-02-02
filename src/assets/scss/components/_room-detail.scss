@@ -10,13 +10,17 @@
     align-items: baseline;
     margin-bottom: $section-gap;
   }
+
+  .calendar {
+    flex: 1 1 auto;
+    margin: 0 20px;
+  }
+
+  &.simple {
+    .amenity-box {
+      margin-top: 10px;
+    }
+  }
 }
 
-.room-basic-list, .room-intro-list, .amenity-box {
-  margin-bottom: $section-gap;
-}
 
-.calendar {
-  flex: 1 1 auto;
-  margin: 0 20px;
-}

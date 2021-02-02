@@ -1,5 +1,7 @@
 <template>
   <div class="full-pop">
+    <slot></slot>
+    
     <img
       :src="statusImg"
       class="status-img"

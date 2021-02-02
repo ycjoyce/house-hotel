@@ -1,22 +1,25 @@
 <template>
-  <form class="edit-panel">
+  <form
+    class="edit-panel"
+    v-if="$store.state.curRoomDetail"
+  >
     <form-control
       v-for="(value, name, index) in config.input"
       :key="'form-control-box-' + index"
       :data="{ name, value }"
     />
 
-    <p class="cal-dates">
-      {2}天，{1}晚平日
+    <p class="edit-cal-dates">
+      {{totalNights}}天，{{dayTypeCount.normal}}晚平日
     </p>
 
-    <div class="cal-price">
-      <p class="cal-price-title">
+    <div class="edit-cal-price-box">
+      <p>
         總計
       </p>
 
-      <p class="cal-price-price">
-        ${1,380}
+      <p class="edit-cal-price font-secondary">
+        ${{formatNum(totalPrice)}}
       </p>
     </div>
 
@@ -24,6 +27,7 @@
       v-for="(btn, index) in config.btn"
       :key="'btn-' + index"
       :data="btn"
+      class="edit-submit"
     />
 
     <ul
@@ -33,7 +37,7 @@
       <li
         v-for="(explaination, index) in config.explaination"
         :key="'explaination-' + index"
-        class="explaination-item"
+        class="explaination-item font-sm"
       >
         {{explaination}}
       </li>
@@ -42,10 +46,13 @@
 </template>
 
 <script>
+import mixin from '@src/assets/js/mixin';
+
 import FormControl from '@src/components/FormControl.vue';
 import SolidBtn from '@src/components/SolidBtn.vue';
 
 export default {
+  mixins: [mixin],
   components: {
     FormControl,
     SolidBtn,
@@ -58,7 +65,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="calendar-container">
     <p
-      v-if="config.title"
+      v-if="config && config.title"
       class="calendar-box-title"
     >
       {{config.title}}
@@ -30,7 +30,7 @@
     </div>
 
     <button
-      v-if="config.reset"
+      v-if="config && config.reset"
       class="calendar-reset btn btn-pure btn-pure-secondary"
       @click="resetCalendar"
     >
@@ -103,7 +103,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-</style>

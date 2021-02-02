@@ -5,6 +5,7 @@
 
   &-title {
     margin-bottom: 10px;
+    color: map-get($map: $theme-color, $key: primary);
   }
 
   &-table {
@@ -42,6 +43,7 @@
 
 .week-date-item {
   cursor: pointer;
+  color: map-get($map: $theme-color, $key: primary);
 
   &.disabled {
     cursor: not-allowed;

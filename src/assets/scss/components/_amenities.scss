@@ -44,3 +44,15 @@
     margin-top: 10px;
   }
 }
+
+.amenity-box.simple {
+  .amenity-icon {
+    &::after {
+      display: none;
+    }
+    
+    &.not-available {
+      display: none;
+    }
+  }
+}

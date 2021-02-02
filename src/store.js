@@ -12,6 +12,12 @@ const store = new Vuex.Store({
       end: null,
     },
     sliderIndex: [],
+    modalStatus: {
+      lightBox: false,
+      reservePop: false,
+    },
+    showCalendar: false,
+    inputData: [],
   },
   getters: {
     sliderIndex(state) {
@@ -57,6 +63,26 @@ const store = new Vuex.Store({
       } else {
         state.sliderIndex.push(data);
       }
+    },
+    toggleModalStatus(state, { type, status }) {
+      state.modalStatus[type] = status;
+    },
+    toggleCalendar(state, data) {
+      if (!data) {
+        state.showCalendar = false;
+        return;
+      }
+      state.showCalendar = data;
+    },
+    getInputData(state, data) {
+      const targetIndex = state.inputData.findIndex((item) => (
+        item.type === data.type && item.title === data.title
+      ));
+      if (targetIndex > -1) {
+        state.inputData.splice(targetIndex, 1, data);
+        return;
+      }
+      state.inputData.push(data);
     },
   },
   actions: {

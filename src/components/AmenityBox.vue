@@ -20,10 +20,6 @@ export default {
       type: Object,
       required: true,
     },
-    simple: {
-      type: Boolean,
-      required: false,
-    },
   },
 }
 </script>

@@ -1,0 +1,52 @@
+.reserve-pop {
+  @extend %modal-layout;
+  background-color: rgba(255, 255, 255, .5);
+  justify-content: center;
+
+  &-content {
+    position: relative;
+    min-width: 60%;
+    max-width: 80%;
+    min-height: 50vh;
+    max-height: 70vh;
+    border: 1px solid map-get($map: $theme-color, $key: primary);
+    background-color: #fff;
+
+    .calendar-container {
+      position: absolute;
+      background-color: #fff;
+      z-index: 6;
+      left: $modal-padding;
+    }
+  }
+
+  &-close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+  }
+}
+
+.reserve {
+  &-edit {
+    background-color: map-get($map: $theme-color, $key: primary);
+    color: #fff;
+    height: 100%;
+    overflow-y: scroll;
+    padding: $modal-padding;
+  }
+
+  &-intro {
+    height: 100%;
+    overflow-y: scroll;
+    padding: $modal-padding;
+    padding-right: $modal-padding * 2;
+    
+    .room-detail {
+      padding: 0;
+      height: auto;
+    }
+  }
+}

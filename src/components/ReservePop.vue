@@ -1,14 +1,19 @@
 <template>
-  <div class="reserve-pop">
-    <button
-      class="btn btn-pure btn-close"
-    ></button>
-
+  <div
+    class="reserve-pop"
+    @click.self="closePop"
+  >
     <component
-      :is="reserveStatus"
+      :is="'ReservePop' + reserveStatus"
       :result="reserveResult"
       class="reserve-pop-content"
-    ></component>
+      :class="'reserve-pop-' + reserveStatus.toLowerCase()"
+    >
+      <button
+        class="btn btn-pure btn-close reserve-pop-close"
+        @click="closePop"
+      ></button>
+    </component>
   </div>
 </template>
 
@@ -23,10 +28,18 @@ export default {
   },
   computed: {
     reserveStatus() {
-      return 'ReservePopResult';
+      return 'Editting';
     },
     reserveResult() {
       return 'success';
+    },
+  },
+  methods: {
+    closePop() {
+      this.$store.commit('toggleModalStatus', {
+        type: 'reservePop',
+        status: false,
+      });
     },
   },
 }

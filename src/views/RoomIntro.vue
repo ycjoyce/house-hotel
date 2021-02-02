@@ -1,8 +1,8 @@
 <template>
   <div class="flex-container">
-    <reserve-pop v-show="false"/>
+    <reserve-pop v-show="showModal('reservePop')"/>
 
-    <light-box v-show="false"/>
+    <light-box v-show="showModal('lightBox')"/>
 
     <price-info class="flex-aside-lg"/>
 
@@ -29,6 +29,13 @@ export default {
     return {
       roomId: null,
     };
+  },
+  computed: {
+    showModal() {
+      return (type) => {
+        return this.$store.state.modalStatus[type];
+      };
+    },
   },
   created() {
     this.roomId = this.$route.params.id;

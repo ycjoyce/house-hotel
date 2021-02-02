@@ -1,0 +1,23 @@
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+
+  &::after {
+    content: '';
+    display: block;
+    height: 1px;
+    flex: 1 1 auto;
+    background-color: map-get($map: $theme-color, $key: secondary);
+    margin-left: 10px;
+  }
+}
+
+.section {
+  &:not(:last-child) {
+    margin-bottom: $section-gap;
+  }
+}

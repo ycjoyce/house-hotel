@@ -140,7 +140,7 @@ export default {
     hasPassed() {
       return (date) => {
         const targetDay = new Date(date);
-        return targetDay < this.today;
+        return targetDay <= this.today;
       };
     },
     exceedLimit() {

@@ -1,5 +1,7 @@
 <template>
-  <div class="slider-container">
+  <div
+    class="slider-container"
+  >
     <ul
       class="slider"
       :style="{ transform: `translateX(-${sliderIndex * 100}%)` }"
