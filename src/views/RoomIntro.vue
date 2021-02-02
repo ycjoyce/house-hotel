@@ -42,6 +42,7 @@ export default {
     
     getRoomDetail(this.roomId).then((res) => {
       this.$store.commit('setCurRoomDetail', res.data.room[0]);
+      this.$store.commit('setCurRoomBooked', res.data.booking);
     });
   },
 }

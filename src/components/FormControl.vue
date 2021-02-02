@@ -49,10 +49,9 @@ export default {
           return targetIndex > -1 ? this.$store.state.inputData[targetIndex].value : '';
         }
         const type = title === '入住日期' ? 'start' : 'end';
-        if (type === 'start') {
-          return this.$store.state.selectDate[type] || this.daysAfterToday(1);
-        }
-        return this.$store.state.selectDate[type] || this.daysAfterToday(2);
+        const daysAfter = title === '入住日期' ? 1 : 2;
+        return this.$store.state.selectDate[type] ||
+                (this.checkBooked(this.daysAfterToday(daysAfter)) ? '' : this.daysAfterToday(daysAfter));
       };
     }
   },

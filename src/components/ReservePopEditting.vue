@@ -24,7 +24,7 @@
 
 <script>
 import mixin from '@src/assets/js/mixin';
-import { reserveRoom } from '@src/assets/js/getData';
+import { reserveRoom, clearAllReservation } from '@src/assets/js/getData';
 
 import EditPanel from '@src/components/EditPanel.vue';
 import RoomDetail from '@src/components/RoomDetail.vue';
@@ -85,22 +85,22 @@ export default {
       let allData = [];
       allData = allData.concat(this.$store.state.inputData);
       for (let item in this.$store.state.selectDate) {
+        let value;
+        if (!this.$store.state.selectDate[item]) {
+          let result;
+          const daysAfter = item === 'start' ? 1 : 2;
+          result = this.checkBooked(this.daysAfterToday(daysAfter)) ? false : this.daysAfterToday(daysAfter);
+          if (!result) continue;
+          value = result;
+        } else {
+          value = this.$store.state.selectDate[item];
+        }
         let formatted = {
           type: 'date',
+          title: item === 'start' ? '入住日期' : '退房日期',
+          value,
         };
-        switch(item) {
-          case 'start':
-            formatted.title = '入住日期';
-            formatted.value = this.$store.state.selectDate[item] || this.daysAfterToday(1);
-            break;
-          case 'end':
-            formatted.title = '退房日期';
-            formatted.value = this.$store.state.selectDate[item] || this.daysAfterToday(2);
-            break;
-          default:
-            break;
-        }
-        allData.push(formatted);
+        allData.push(formatted);   
       }
       let length = 0;
       for (let col in this.editPanelConfig.input) {
@@ -111,16 +111,10 @@ export default {
     getDateArr(start, end) {
       const newStart = new Date(start).getTime();
       const newEnd = new Date(end).getTime();
-      const dayDistance = 24 * 60 * 60 * 1000;
       const result = [];
-      for (let i = newStart; i < newEnd; i += dayDistance) {
+      for (let i = newStart; i < newEnd; i += this.dayDistance) {
         let formattedDate = new Date(i).toLocaleDateString();
-        formattedDate = formattedDate.split('/').map((time, index) => {
-          if (index < 1) return time;
-          return time < 10 ? `0${time}` : time;
-        });
-        formattedDate = formattedDate.join('-');
-        result.push(formattedDate);
+        result.push(this.formattedDateStr(formattedDate));
       }
       return result;
     },
@@ -143,5 +137,10 @@ export default {
       });
     },
   },
+  mounted() {
+    clearAllReservation().then((res) => {
+      console.log(res);
+    });
+  }
 }
 </script>

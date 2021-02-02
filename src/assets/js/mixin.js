@@ -12,11 +12,23 @@ export default {
     holidayPrice() {
       return this.$store.state.curRoomDetail.holidayPrice;
     },
+    dayDistance() {
+      return 24 * 60 * 60 * 1000;
+    },
     daysAfterToday() {
       return (days) => {
-        const dayDistance = 1 * 24 * 60 * 60 * 1000;
-        const targetDay = new Date(new Date().getTime() + days * dayDistance);
+        const targetDay = new Date(new Date().getTime() + days * this.dayDistance);
         return targetDay.toLocaleDateString();
+      };
+    },
+    formattedDateStr() {
+      return (dateStr) => {
+        let result = dateStr.split('/').map((time, index) => {
+          if (index < 1) return time;
+          return time < 10 ? `0${time}` : time;
+        });
+        result = result.join('-');
+        return result;
       };
     },
     dayTypeCount() {
@@ -39,7 +51,7 @@ export default {
       const newDateStart = new Date(this.selectedDateStart);
       const newDateEnd = new Date(this.selectedDateEnd);
       const weekdayStart = newDateStart.getDay();
-      const nights = (newDateEnd - newDateStart) / 1000 / 60 / 60 / 24;
+      const nights = (newDateEnd - newDateStart) / this.dayDistance;
       const weekDays = [];
       for (let i = 0; i <= nights - 1; i += 1) {
         weekDays.push(weekdayStart + i > 6 ? weekdayStart + i - 7 : weekdayStart + i);
@@ -85,6 +97,12 @@ export default {
           arrNum.splice(i + 1, 0, ',');
         }
         return arrNum.reverse().join('');
+      };
+    },
+    checkBooked() {
+      return (date) => {
+        const bookedDates = this.$store.state.curRoomBooked.map((item) => item.date);
+        return bookedDates.includes(this.formattedDateStr(date));
       };
     },
   },

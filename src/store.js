@@ -7,6 +7,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     curRoomDetail: null,
+    curRoomBooked: [],
     selectDate: {
       start: null,
       end: null,
@@ -30,6 +31,9 @@ const store = new Vuex.Store({
   mutations: {
     setCurRoomDetail(state, data) {
       state.curRoomDetail = data;
+    },
+    setCurRoomBooked(state, data) {
+      state.curRoomBooked = data;
     },
     setSelectDate(state, date) {
       if (!date) {

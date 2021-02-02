@@ -24,6 +24,7 @@
           class="week-date-item"
           :class="{ 
             disabled: hasPassed(dateStr(weekNo, dateNo - 1)) ||
+                      checkBooked(dateStr(weekNo, dateNo - 1)) ||
                       exceedLimit(dateStr(weekNo, dateNo - 1)) ||
                       !calDate(weekNo, dateNo - 1),
             empty: !calDate(weekNo, dateNo - 1),
@@ -43,7 +44,10 @@
 </template>
 
 <script>
+import mixin from '@src/assets/js/mixin';
+
 export default {
+  mixins: [mixin],
   props: {
     month: {
       type: Number,
@@ -150,7 +154,7 @@ export default {
         }
         const startDay = new Date(this.selectedDateStart);
         const targetDay = new Date(date);
-        const days = (targetDay - startDay) / 1000 / 60 / 60 / 24;
+        const days = (targetDay - startDay) / this.dayDistance;
         return days > this.limitDays;
       };
     },
