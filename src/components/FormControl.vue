@@ -48,10 +48,7 @@ export default {
           const targetIndex = this.$store.state.inputData.findIndex((item) => item.title === title);
           return targetIndex > -1 ? this.$store.state.inputData[targetIndex].value : '';
         }
-        const type = title === '入住日期' ? 'start' : 'end';
-        const daysAfter = title === '入住日期' ? 1 : 2;
-        return this.$store.state.selectDate[type] ||
-                (this.checkBooked(this.daysAfterToday(daysAfter)) ? '' : this.daysAfterToday(daysAfter));
+        return this.dateDefaultVal(title);
       };
     }
   },

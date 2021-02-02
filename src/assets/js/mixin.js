@@ -1,3 +1,9 @@
+import {
+  formattedDateStr,
+  dayDistance,
+  getDateArr,
+} from '@src/assets/js/util';
+
 export default {
   computed: {
     selectedDateStart() {
@@ -12,24 +18,14 @@ export default {
     holidayPrice() {
       return this.$store.state.curRoomDetail.holidayPrice;
     },
-    dayDistance() {
-      return 24 * 60 * 60 * 1000;
-    },
     daysAfterToday() {
       return (days) => {
-        const targetDay = new Date(new Date().getTime() + days * this.dayDistance);
+        const targetDay = new Date(new Date().getTime() + days * dayDistance);
         return targetDay.toLocaleDateString();
       };
     },
     formattedDateStr() {
-      return (dateStr) => {
-        let result = dateStr.split('/').map((time, index) => {
-          if (index < 1) return time;
-          return time < 10 ? `0${time}` : time;
-        });
-        result = result.join('-');
-        return result;
-      };
+      return (dateStr) => formattedDateStr(dateStr);
     },
     dayTypeCount() {
       const result = {
@@ -51,7 +47,7 @@ export default {
       const newDateStart = new Date(this.selectedDateStart);
       const newDateEnd = new Date(this.selectedDateEnd);
       const weekdayStart = newDateStart.getDay();
-      const nights = (newDateEnd - newDateStart) / this.dayDistance;
+      const nights = (newDateEnd - newDateStart) / dayDistance;
       const weekDays = [];
       for (let i = 0; i <= nights - 1; i += 1) {
         weekDays.push(weekdayStart + i > 6 ? weekdayStart + i - 7 : weekdayStart + i);
@@ -104,6 +100,27 @@ export default {
         const bookedDates = this.$store.state.curRoomBooked.map((item) => item.date);
         return bookedDates.includes(this.formattedDateStr(date));
       };
+    },
+    dateDefaultVal() {
+      return (title) => {
+        const type = title === '入住日期' ? 'start' : 'end';
+        if (!this.selectedDateStart && !this.selectedDateEnd) {
+          const daysAfter = title === '入住日期' ? 1 : 2;
+          return this.checkBooked(this.daysAfterToday(1)) ? '' : this.daysAfterToday(daysAfter);
+        }
+        if (!this.selectedDateEnd) {
+          if (type === 'start') return this.selectedDateStart;
+          let nextDay = new Date(this.selectedDateStart).getTime() + dayDistance;
+          nextDay = new Date(nextDay).toLocaleDateString();
+          return this.checkBooked(nextDay) ? '' : nextDay;
+        }
+        return this.$store.state.selectDate[type];
+      };
+    },
+  },
+  methods: {
+    getDateArr(start, end) {
+      return getDateArr(start, end);
     },
   },
 };

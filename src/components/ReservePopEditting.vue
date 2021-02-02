@@ -24,7 +24,7 @@
 
 <script>
 import mixin from '@src/assets/js/mixin';
-import { reserveRoom, clearAllReservation } from '@src/assets/js/getData';
+import { reserveRoom } from '@src/assets/js/getData';
 
 import EditPanel from '@src/components/EditPanel.vue';
 import RoomDetail from '@src/components/RoomDetail.vue';
@@ -85,19 +85,14 @@ export default {
       let allData = [];
       allData = allData.concat(this.$store.state.inputData);
       for (let item in this.$store.state.selectDate) {
-        let value;
-        if (!this.$store.state.selectDate[item]) {
-          let result;
-          const daysAfter = item === 'start' ? 1 : 2;
-          result = this.checkBooked(this.daysAfterToday(daysAfter)) ? false : this.daysAfterToday(daysAfter);
-          if (!result) continue;
-          value = result;
-        } else {
-          value = this.$store.state.selectDate[item];
-        }
+        const title = item === 'start' ? '入住日期' : '退房日期';
+        const value = this.dateDefaultVal(title);
+        if (!value) {
+          continue
+        };
         let formatted = {
           type: 'date',
-          title: item === 'start' ? '入住日期' : '退房日期',
+          title,
           value,
         };
         allData.push(formatted);   
@@ -107,16 +102,6 @@ export default {
         length += this.editPanelConfig.input[col].length;
       }
       return allData.length < length ? false : allData;
-    },
-    getDateArr(start, end) {
-      const newStart = new Date(start).getTime();
-      const newEnd = new Date(end).getTime();
-      const result = [];
-      for (let i = newStart; i < newEnd; i += this.dayDistance) {
-        let formattedDate = new Date(i).toLocaleDateString();
-        result.push(this.formattedDateStr(formattedDate));
-      }
-      return result;
     },
     sendReserve() {
       const name = this.arrangedData.find((item) => item.title === '姓名').value;
@@ -137,10 +122,5 @@ export default {
       });
     },
   },
-  mounted() {
-    clearAllReservation().then((res) => {
-      console.log(res);
-    });
-  }
 }
 </script>

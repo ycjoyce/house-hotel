@@ -1,5 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import {
+  formattedDateStr,
+  getDateArr,
+} from '@src/assets/js/util';
 
 Vue.use(Vuex);
 
@@ -48,6 +52,18 @@ const store = new Vuex.Store({
       if (!state.selectDate.start || (state.selectDate.start && state.selectDate.end)) {
         state.selectDate.start = date;
         state.selectDate.end = null;
+        return;
+      }
+
+      const selectedDates = getDateArr(state.selectDate.start, date);
+      const bookedDates = state.curRoomBooked.map((book) => book.date);
+      const result = selectedDates.map((selectedDate) => (
+        bookedDates.includes(formattedDateStr(selectedDate))
+      ));
+
+      if (result.includes(true)) {
+        state.selectDate.end = null;
+        state.selectDate.start = date;
         return;
       }
 
