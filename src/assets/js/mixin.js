@@ -94,7 +94,7 @@ export default {
     formatNum() {
       return (num) => {
         const arrNum = `${num}`.split('').reverse();
-        for (let i = 2; i < arrNum.length; i += 4) {
+        for (let i = 2; i < arrNum.length - 1; i += 4) {
           arrNum.splice(i + 1, 0, ',');
         }
         return arrNum.reverse().join('');
