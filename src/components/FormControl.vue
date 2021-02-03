@@ -68,7 +68,7 @@ export default {
       this.$store.commit('getInputData', val);
     },
     checkTel(val) {
-      const reg= /^09([0-9]{2})-?([0-9]{3})-?([0-9]{3})$/;
+      const reg = /^09([0-9]{2})-?([0-9]{3})-?([0-9]{3})$/;
       if(reg.test(val)){
         return {
           status: true,

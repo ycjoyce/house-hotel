@@ -4,16 +4,14 @@
     
     <img
       :src="statusImg"
-      class="status-img"
+      class="reserve-status-img"
     >
 
-    <p class="status-title">
+    <p class="font-primary">
       {{statusTitle}}
     </p>
 
-    <p class="status-text">
-      {{statusText}}
-    </p>
+    <p v-html="statusText"></p>
   </div>
 </template>
 
@@ -27,20 +25,25 @@ export default {
   },
   computed: {
     statusImg() {
-      return 'success'; // require
+      return require(`@img/icon/reserve-${this.result}.svg`);
     },
     statusTitle() {
-      return '預約成功';
-      // '預約失敗'
+      return this.result === 'success' ? '預約成功' : '預約失敗';
     },
     statusText() {
-      return '請留意簡訊發送訂房通知，入住當日務必出示此訂房通知，\n若未收到簡訊請來電確認，謝謝您';
-      // '哎呀！晚了一步！您預約的日期已經被預約走了，\n再看看其它房型吧'
+      let msg = '';
+      switch (this.result) {
+        case 'success':
+          msg = '請留意簡訊發送訂房通知，入住當日務必出示此訂房通知，<br>若未收到簡訊請來電確認，謝謝您';
+          break;
+        case 'fail':
+          msg = '哎呀！晚了一步！您預約的日期已經被預約走了，<br>再看看其它房型吧';
+          break;
+        default:
+          break;
+      }
+      return msg;
     },
   },
 }
 </script>
-
-<style>
-
-</style>

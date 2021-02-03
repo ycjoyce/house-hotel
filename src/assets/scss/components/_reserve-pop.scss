@@ -12,6 +12,24 @@
     border: 1px solid map-get($map: $theme-color, $key: primary);
     background-color: #fff;
 
+    &.full-pop {
+      background-color: map-get($map: $theme-color, $key: primary);
+      color: #fff;
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: $layout-padding;
+      overflow-y: scroll;
+
+      .reserve-pop-close {
+        &::before, &::after {
+          background-color: #fff;
+        }
+      }
+    }
+
     .calendar-container {
       position: absolute;
       background-color: #fff;
@@ -48,5 +66,10 @@
       padding: 0;
       height: auto;
     }
+  }
+
+  &-status-img {
+    display: inline-block;
+    width: 20%;
   }
 }

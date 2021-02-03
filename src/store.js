@@ -23,6 +23,10 @@ const store = new Vuex.Store({
     },
     showCalendar: false,
     inputData: [],
+    popContent: {
+      type: 'Editting',
+      status: null,
+    },
   },
   getters: {
     sliderIndex(state) {
@@ -38,6 +42,9 @@ const store = new Vuex.Store({
     },
     setCurRoomBooked(state, data) {
       state.curRoomBooked = data;
+    },
+    addCurRoomBooked(state, data) {
+      state.curRoomBooked = state.curRoomBooked.concat(data);
     },
     setSelectDate(state, date) {
       if (!date) {
@@ -95,6 +102,10 @@ const store = new Vuex.Store({
       state.showCalendar = data;
     },
     getInputData(state, data) {
+      if (!data) {
+        state.inputData.splice(0);
+        return;
+      }
       const targetIndex = state.inputData.findIndex((item) => (
         item.type === data.type && item.title === data.title
       ));
@@ -104,6 +115,10 @@ const store = new Vuex.Store({
       }
       state.inputData.push(data);
     },
+    setPopContent(state, { type, status = null }) {
+      state.popContent.type = type;
+      state.popContent.status = status;
+    },
   },
   actions: {
     initSlider({ commit }, id) {
@@ -111,6 +126,10 @@ const store = new Vuex.Store({
         id,
         index: 0,
       });
+    },
+    initAllData({ commit }) {
+      commit('setSelectDate', false);
+      commit('getInputData', false);
     },
   },
 });

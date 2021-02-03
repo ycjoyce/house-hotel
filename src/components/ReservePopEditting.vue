@@ -116,9 +116,17 @@ export default {
       };
       
       reserveRoom(this.$route.params.id, param).then((res) => {
-        console.log(res);
+        this.$store.commit('setPopContent', {
+          type: 'Result',
+          status: 'success',
+        });
+        this.$store.commit('addCurRoomBooked', res.data.booking);
       }).catch((err) => {
         console.error(err);
+        this.$store.commit('setPopContent', {
+          type: 'Result',
+          status: 'fail',
+        });
       });
     },
   },

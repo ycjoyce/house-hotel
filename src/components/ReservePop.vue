@@ -28,10 +28,10 @@ export default {
   },
   computed: {
     reserveStatus() {
-      return 'Editting';
+      return this.$store.state.popContent.type;
     },
     reserveResult() {
-      return 'success';
+      return this.$store.state.popContent.status;
     },
   },
   methods: {
@@ -40,11 +40,14 @@ export default {
         type: 'reservePop',
         status: false,
       });
+      if (this.$store.state.popContent.type === 'Editting') {
+        return;
+      }
+      this.$store.commit('setPopContent', {
+        type: 'Editting',
+      });
+      this.$store.dispatch('initAllData');
     },
   },
 }
 </script>
-
-<style>
-
-</style>
