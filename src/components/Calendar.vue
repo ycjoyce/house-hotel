@@ -8,7 +8,7 @@
       <tr class="weekday-row">
         <th
           v-for="(day, index) in weekday"
-          :key="'day-' + index"
+          :key="`day-${index}`"
           class="weekday-item font-bold"
         >
           {{day}}
@@ -17,7 +17,7 @@
 
       <tr
         v-for="weekNo in weekAmt"
-        :key="'week-' + weekNo"
+        :key="`week-${weekNo}`"
         class="week-row"
       >
         <td
@@ -33,7 +33,7 @@
             middle: calMiddle(weekNo, dateNo - 1),
           }"
           v-for="dateNo in 7"
-          :key="'date-' + dateNo"
+          :key="`date-${dateNo}`"
           @click="setSelectDate(`${year}/${month}/${calDate(weekNo, dateNo - 1)}`)"
         >
           {{calDate(weekNo, dateNo - 1)}}
@@ -83,25 +83,16 @@ export default {
         'Fr',
         'Sa',
       ],
-      today: new Date(new Date().toLocaleDateString()),
       limitDays: 90,
     };
   },
   computed: {
-    selectedDateStart() {
-      return this.$store.state.selectDate.start;
-    },
-    selectedDateEnd() {
-      return this.$store.state.selectDate.end;
-    },
     monthLength() {
       let length;
-      let yearType;
+      let yearType = 'leap';
 
       if (this.year % 4 !== 0 || (this.year % 100 === 0 && this.year % 400 !== 0)) {
         yearType = 'normal';
-      } else {
-        yearType = 'leap';
       }
 
       length = [31, yearType === 'normal' ? 28 : 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -144,7 +135,8 @@ export default {
     hasPassed() {
       return (date) => {
         const targetDay = new Date(date);
-        return targetDay <= this.today;
+        const today = new Date(new Date().toLocaleDateString());
+        return targetDay <= today;
       };
     },
     exceedLimit() {

@@ -3,7 +3,7 @@
     <label
       class="form-control"
       v-for="(title, index) in data.value"
-      :key="'form-control-' + index"
+      :key="`form-control-${index}`"
     >
       <p class="form-control-title">
         {{title}}
@@ -51,7 +51,7 @@ export default {
         }
         return this.dateDefaultVal(title);
       };
-    }
+    },
   },
   methods: {
     emitVal(name, title) {

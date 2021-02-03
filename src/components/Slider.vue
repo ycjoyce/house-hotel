@@ -10,7 +10,7 @@
 
       <li
         v-for="(image, index) in images"
-        :key="'image-' + index"
+        :key="`image-${index}`"
         class="slider-img-box"
       >
         <img
@@ -61,15 +61,9 @@ export default {
         index: sendIndex,
       });
     },
-    initSlider() {
-      this.$store.commit('setSliderIndex', {
-        id: this.sliderId,
-        index: 0,
-      });
-    },
   },
   created() {
-    this.initSlider();
+    this.$store.dispatch('initSlider', this.id);
 
     this.autoPlayTimer = setInterval(
       this.slideImage,

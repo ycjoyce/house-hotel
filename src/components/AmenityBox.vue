@@ -2,7 +2,7 @@
   <div class="amenity-box">
     <amenity-icon
       v-for="(value, name, index) in amenities"
-      :key="'amenity-' + index"
+      :key="`amenity-${index}`"
       :amenity="{ name, value }"
     />
   </div>

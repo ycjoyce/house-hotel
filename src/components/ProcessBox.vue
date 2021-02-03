@@ -8,9 +8,10 @@
     </div>
 
     <div class="process-content">
-      <p class="process-content-text">
-        {{data.text}}
-      </p>
+      <p
+        v-html="data.text"
+        class="process-content-text"
+      ></p>
     </div>
   </div>
 </template>

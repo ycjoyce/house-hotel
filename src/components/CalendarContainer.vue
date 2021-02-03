@@ -31,6 +31,7 @@
 
     <button
       v-if="config && config.reset"
+      v-show="$store.state.selectDate.start || $store.state.selectDate.end"
       class="calendar-reset btn btn-pure btn-pure-secondary"
       @click="resetCalendar"
     >

@@ -5,7 +5,7 @@
   >
     <form-control
       v-for="(value, name, index) in config.input"
-      :key="'form-control-box-' + index"
+      :key="`form-control-box-${index}`"
       :data="{ name, value }"
     />
 
@@ -25,7 +25,7 @@
 
     <solid-btn
       v-for="(btn, index) in config.btn"
-      :key="'btn-' + index"
+      :key="`btn-${index}`"
       :data="btn"
       class="edit-submit"
     />
@@ -36,7 +36,7 @@
     >
       <li
         v-for="(explaination, index) in config.explaination"
-        :key="'explaination-' + index"
+        :key="`explaination-${index}`"
         class="explaination-item font-sm"
       >
         {{explaination}}

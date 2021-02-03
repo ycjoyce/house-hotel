@@ -3,7 +3,7 @@
     <div class="room-cards-box">
       <img-card
         v-for="(room, index) in rooms"
-        :key="'room-' + index"
+        :key="`room-${index}`"
         :data="room"
         class="room-card"
       />
@@ -26,7 +26,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-</style>

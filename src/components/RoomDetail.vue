@@ -31,7 +31,7 @@
       <ul class="section room-intro-list">
         <li
           v-for="(intro, index) in roomIntro"
-          :key="'intro-' + index"
+          :key="`intro-${index}`"
           class="styled-list-item"
         >
           {{intro}}
@@ -101,7 +101,7 @@
         <div class="process-container">
           <process-box
             v-for="(item, index) in process"
-            :key="'process-' + index"
+            :key="`process-${index}`"
             :data="item"
           />
         </div>
@@ -140,11 +140,11 @@ export default {
         },
         {
           img: require('@img/icon/msg.svg'),
-          text: '系統立即回覆是否預訂成功\n並以簡訊發送訂房通知\n(若未收到簡訊請來電確認)',
+          text: '系統立即回覆是否預訂成功<br>並以簡訊發送訂房通知<br>(若未收到簡訊請來電確認)',
         },
         {
           img: require('@img/icon/payment.svg'),
-          text: '入住當日憑訂房通知\n以現金或刷卡付款即可\n(僅接受VISA.JCB.銀聯卡)',
+          text: '入住當日憑訂房通知<br>以現金或刷卡付款即可<br>(僅接受VISA.JCB.銀聯卡)',
         },
       ],
     };

@@ -2,7 +2,7 @@
   <ol class="slider-dots">
     <li
       v-for="n in amount"
-      :key="'slider-dot-' + n"
+      :key="`slider-dot-${n}`"
       class="slider-dot"
       :class="{ active: curSlide(n - 1) }"
       @click="slideImage(n - 1)"
@@ -33,7 +33,7 @@ export default {
     slideImage(index) {
       this.$store.commit('setSliderIndex', {
         id: this.id,
-        index: index,
+        index,
       });
     },
   },

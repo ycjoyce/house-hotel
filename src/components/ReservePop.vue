@@ -4,10 +4,10 @@
     @click.self="closePop"
   >
     <component
-      :is="'ReservePop' + reserveStatus"
+      :is="`ReservePop${reserveStatus}`"
       :result="reserveResult"
       class="reserve-pop-content"
-      :class="'reserve-pop-' + reserveStatus.toLowerCase()"
+      :class="`reserve-pop-${reserveStatus.toLowerCase()}`"
     >
       <button
         class="btn btn-pure btn-close reserve-pop-close"
