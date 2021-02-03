@@ -5,6 +5,11 @@ import {
 } from '@src/assets/js/util';
 
 export default {
+  data() {
+    return {
+      dayDistance,
+    };
+  },
   computed: {
     selectedDateStart() {
       return this.$store.state.selectDate.start;
@@ -20,7 +25,7 @@ export default {
     },
     daysAfterToday() {
       return (days) => {
-        const targetDay = new Date(new Date().getTime() + days * dayDistance);
+        const targetDay = new Date(new Date().getTime() + days * this.dayDistance);
         return targetDay.toLocaleDateString();
       };
     },
@@ -47,7 +52,7 @@ export default {
       const newDateStart = new Date(this.selectedDateStart);
       const newDateEnd = new Date(this.selectedDateEnd);
       const weekdayStart = newDateStart.getDay();
-      const nights = (newDateEnd - newDateStart) / dayDistance;
+      const nights = (newDateEnd - newDateStart) / this.dayDistance;
       const weekDays = [];
       for (let i = 0; i <= nights - 1; i += 1) {
         weekDays.push(weekdayStart + i > 6 ? weekdayStart + i - 7 : weekdayStart + i);
@@ -110,9 +115,9 @@ export default {
         }
         if (!this.selectedDateEnd) {
           if (type === 'start') return this.selectedDateStart;
-          let nextDay = new Date(this.selectedDateStart).getTime() + dayDistance;
+          let nextDay = new Date(this.selectedDateStart).getTime() + this.dayDistance;
           nextDay = new Date(nextDay).toLocaleDateString();
-          return this.checkBooked(nextDay) ? '' : nextDay;
+          return nextDay;
         }
         return this.$store.state.selectDate[type];
       };
