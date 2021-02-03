@@ -60,6 +60,10 @@ export default {
         window.event.target.value = '';
         return;
       }
+      const value = window.event.target.value.trim();
+      if (!value) {
+        return;
+      }
       const val = {
         type: name,
         title,
