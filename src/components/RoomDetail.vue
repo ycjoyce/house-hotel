@@ -43,7 +43,9 @@
         class="section"
       />
 
-      <calendar-container :config="calendarConfig"/>
+      <calendar-container
+        :config="calendarConfig"
+      />
     </main>
 
     <div

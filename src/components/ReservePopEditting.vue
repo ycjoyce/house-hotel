@@ -84,23 +84,30 @@ export default {
     arrangeData() {
       let allData = [];
       allData = allData.concat(this.$store.state.inputData);
+
       for (let item in this.$store.state.selectDate) {
         const title = item === 'start' ? '入住日期' : '退房日期';
         const value = this.dateDefaultVal(title);
+
         if (!value) {
-          continue
-        };
+          continue;
+        }
+
         let formatted = {
           type: 'date',
           title,
           value,
         };
+
         allData.push(formatted);   
       }
+
       let length = 0;
+
       for (let col in this.editPanelConfig.input) {
         length += this.editPanelConfig.input[col].length;
       }
+      
       return allData.length < length ? false : allData;
     },
     sendReserve() {

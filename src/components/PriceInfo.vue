@@ -25,7 +25,7 @@
       <solid-btn
         :data="bookingBtn"
         class="room-reserve"
-      ></solid-btn>
+      />
 
       <slider-dots
         :id="sliderId"
@@ -39,7 +39,7 @@
       :period="5"
       :id="sliderId"
       class="pos-intro"
-    ></slider>
+    />
   </aside>
 </template>
 
@@ -59,7 +59,7 @@ export default {
   },
   data() {
     return {
-      sliderId: new Date().getTime(),
+      sliderId: Date.now(),
       bookingBtn: {
         title: 'Booking now',
         type: 'primary',

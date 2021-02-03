@@ -24,9 +24,9 @@ export default {
   },
   computed: {
     curSlide() {
-      return (index) => {
-        return index === this.$store.getters.sliderIndex(this.id);
-      };
+      return (index) => (
+        index === this.$store.getters.sliderIndex(this.id)
+      )
     },
   },
   methods: {

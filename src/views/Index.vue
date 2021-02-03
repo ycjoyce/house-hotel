@@ -45,7 +45,7 @@ export default {
         require('@img/house-3.jpeg'),
         require('@img/house-4.jpeg'),
       ],
-      sliderId: new Date().getTime(),
+      sliderId: Date.now(),
     };
   },
   created() {

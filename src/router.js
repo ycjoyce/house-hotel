@@ -7,24 +7,24 @@ import RoomIntro from '@src/views/RoomIntro.vue';
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    component: Index,
-  },
-  {
-    path: '/room-intro',
-    component: RoomIntro,
-    children: [
-      {
-        path: ':id',
-      },
-    ],
-  },
+	{
+		path: '/',
+		component: Index,
+	},
+	{
+		path: '/room-intro',
+		component: RoomIntro,
+		children: [
+			{
+				path: ':id',
+			},
+		],
+	},
 ];
 
 const router = new VueRouter({
-  base: '/',
-  routes,
+	base: '/',
+	routes,
 });
 
 export default router;

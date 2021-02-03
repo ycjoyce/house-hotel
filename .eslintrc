@@ -6,7 +6,10 @@
         "node": true
     },
     "rules": {
-        "no-unused-vars": 0
+        "no-unused-vars": 0,
+        "no-tabs": "off",
+        "indent": ["error", "tab"],
+        "global-require": "off"
     },
     "settings": {
         "import/resolver": {

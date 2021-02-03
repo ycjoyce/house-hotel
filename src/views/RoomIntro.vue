@@ -1,12 +1,20 @@
 <template>
   <div class="flex-container">
-    <reserve-pop v-show="showModal('reservePop')"/>
+    <reserve-pop
+      v-show="showModal('reservePop')"
+    />
 
-    <light-box v-show="showModal('lightBox')"/>
+    <light-box
+      v-show="showModal('lightBox')"
+    />
 
-    <price-info class="flex-aside-lg"/>
+    <price-info
+      class="flex-aside-lg"
+    />
 
-    <room-detail class="flex-main"/>
+    <room-detail
+      class="flex-main"
+    />
   </div>
 </template>
 
@@ -32,9 +40,9 @@ export default {
   },
   computed: {
     showModal() {
-      return (type) => {
-        return this.$store.state.modalStatus[type];
-      };
+      return (type) => (
+        this.$store.state.modalStatus[type]
+      )
     },
   },
   created() {

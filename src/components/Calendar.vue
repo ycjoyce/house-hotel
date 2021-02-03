@@ -119,7 +119,7 @@ export default {
       } else {
         weekAmt = 4;
         leftDays = this.monthLength - 22;
-        if (this.firstday.weekday+leftDays > 6) {
+        if (this.firstday.weekday + leftDays > 6) {
           weekAmt++;
         }
       }
@@ -130,14 +130,14 @@ export default {
       return (weekNo, dateNo) => {
         const date = 1 + 7 * (weekNo - 1) - (this.firstday.weekday - dateNo);
         return date > this.monthLength || date < 1 ? null : date;
-      };
+      }
     },
     hasPassed() {
       return (date) => {
         const targetDay = new Date(date);
         const today = new Date(new Date().toLocaleDateString());
         return targetDay <= today;
-      };
+      }
     },
     exceedLimit() {
       return (date) => {
@@ -148,12 +148,12 @@ export default {
         const targetDay = new Date(date);
         const days = (targetDay - startDay) / this.dayDistance;
         return days > this.limitDays;
-      };
+      }
     },
     dateStr() {
       return (week, date) => (
         `${this.year}/${this.month}/${this.calDate(week, date)}`
-      );
+      )
     },
     calMiddle() {
       return (week, date) => {
@@ -161,7 +161,7 @@ export default {
         const startDay = new Date(this.selectedDateStart);
         const endDay = new Date(this.selectedDateEnd);
         return targetDay > startDay && targetDay < endDay;
-      };
+      }
     },
   },
   methods: {

@@ -50,7 +50,7 @@ export default {
           return targetIndex > -1 ? this.$store.state.inputData[targetIndex].value : '';
         }
         return this.dateDefaultVal(title);
-      };
+      }
     },
   },
   methods: {
@@ -58,6 +58,10 @@ export default {
       if (name === 'tel' && !this.checkTel(window.event.target.value).status) {
         alert(this.checkTel(window.event.target.value).msg);
         window.event.target.value = '';
+        return;
+      }
+      const value = window.event.target.value.trim();
+      if (!value) {
         return;
       }
       const val = {
