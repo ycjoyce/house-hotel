@@ -141,10 +141,7 @@ export default {
     },
     exceedLimit() {
       return (date) => {
-        if (!this.selectedDateStart) {
-          return false;
-        }
-        const startDay = new Date(this.selectedDateStart);
+        const startDay = new Date(Date.now());
         const targetDay = new Date(date);
         const days = (targetDay - startDay) / this.dayDistance;
         return days > this.limitDays;
