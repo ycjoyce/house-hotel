@@ -29,7 +29,7 @@
       :data="btn"
       class="edit-submit btn-solid-secondary"
     >
-      確認送出
+      {{btn.title}}
     </solid-btn>
 
     <ul
