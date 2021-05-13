@@ -28,25 +28,24 @@
 
 ## 應用介面
 - 首頁
-![首頁](https://imgur.com/X0SV1T4)
+![首頁](https://i.imgur.com/X0SV1T4.png)
 
 - 單一房型頁面
 > 該房型詳細資訊
-![單一房型頁面-該房型詳細資訊](https://imgur.com/8zlsu3d)
+![單一房型頁面-該房型詳細資訊](https://i.imgur.com/8zlsu3d.png)
 
 > 點擊左側slider查看房型照片
-![單一房型頁面-點擊查看房型照片](https://imgur.com/BaMypyj)
+![單一房型頁面-點擊查看房型照片](https://i.imgur.com/BaMypyj.png)
 
 > 用日曆瀏覽該房型預約狀況並選擇預約，選擇日期時，即時顯示訂房平假日天數及價格總價
-![單一房型頁面-使用日曆操作預約](https://imgur.com/gWjesdd)
+![單一房型頁面-使用日曆操作預約](https://i.imgur.com/Jj1mNUN.png)
 
 > 填寫基本資訊訂房
-![單一房型頁面-填寫基本資訊訂房(1)](https://imgur.com/dI7pYQx)
-![單一房型頁面-填寫基本資訊訂房(2)](https://imgur.com/Jj1mNUN)
+![單一房型頁面-填寫基本資訊訂房(1)](https://i.imgur.com/dI7pYQx.png)
+![單一房型頁面-填寫基本資訊訂房(2)](https://i.imgur.com/Jj1mNUN.png)
 
 > 回傳預約成功與否訊息
-![單一房型頁面-回傳預約成功與否訊息](https://imgur.com/HOsGj8k)
-[單一房型頁面-回傳預約成功與否訊息](https://imgur.com/HOsGj8k)
+![單一房型頁面-回傳預約成功與否訊息](https://i.imgur.com/HOsGj8k.png)
 
 ## 聲明
 - 介接 API 來自 The F2E - 前端修煉精神時光屋
