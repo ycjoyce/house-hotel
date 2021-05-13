@@ -2,7 +2,7 @@
 好室House Hotel是一個基於 Vue.js 建構而成的訂房網站。UI 皆以 SCSS 遵循 OOCSS 手刻而成。
 
 ## 線上演示
--Demo：[Demo](https://github.com/ycjoyce/house-hotel)
+[Demo](https://ycjoyce.github.io/house-hotel/)
 
 ## 功能地圖
 1. 首頁
