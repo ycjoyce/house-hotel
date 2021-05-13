@@ -27,8 +27,10 @@
       v-for="(btn, index) in config.btn"
       :key="`btn-${index}`"
       :data="btn"
-      class="edit-submit"
-    />
+      class="edit-submit btn-solid-secondary"
+    >
+      確認送出
+    </solid-btn>
 
     <ul
       v-if="config.explaination"

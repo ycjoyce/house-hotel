@@ -58,8 +58,6 @@ export default {
         },
         btn: [
           {
-            title: '確認送出',
-            type: 'secondary',
             method: () => {
               if (!this.arrangeData()) {
                 alert('請填寫完整資料');

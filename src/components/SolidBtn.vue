@@ -1,10 +1,9 @@
 <template>
   <button
     class="btn btn-solid font-bold font-tertiary"
-    :class="`btn-solid-${data.type}`"
     @click.prevent="data.method"
   >
-    {{data.title}}
+    <slot></slot>
   </button>
 </template>
 

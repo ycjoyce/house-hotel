@@ -24,8 +24,10 @@
 
       <solid-btn
         :data="bookingBtn"
-        class="room-reserve"
-      />
+        class="room-reserve btn-solid-primary"
+      >
+        Booking now
+      </solid-btn>
 
       <slider-dots
         :id="sliderId"
@@ -62,7 +64,6 @@ export default {
       sliderId: Date.now(),
       bookingBtn: {
         title: 'Booking now',
-        type: 'primary',
         method: () => {
           this.$store.commit('toggleModalStatus', {
             type: 'reservePop',
