@@ -26,7 +26,7 @@
         :data="bookingBtn"
         class="room-reserve btn-solid-primary"
       >
-        Booking now
+        {{bookingBtn.title}}
       </solid-btn>
 
       <slider-dots
