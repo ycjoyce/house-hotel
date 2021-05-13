@@ -37,7 +37,7 @@
 ![單一房型頁面-點擊查看房型照片](https://i.imgur.com/BaMypyj.png)
 
 - 單一房型頁面 - 用日曆瀏覽該房型預約狀況並選擇預約，選擇日期時，即時顯示訂房平假日天數及價格總價
-![單一房型頁面-使用日曆操作預約](https://i.imgur.com/Jj1mNUN.png)
+![單一房型頁面-使用日曆操作預約](https://i.imgur.com/gWjesdd.png)
 
 - 單一房型頁面 - 填寫基本資訊訂房
 ![單一房型頁面-填寫基本資訊訂房(1)](https://i.imgur.com/dI7pYQx.png)
@@ -47,6 +47,6 @@
 ![單一房型頁面-回傳預約成功與否訊息](https://i.imgur.com/HOsGj8k.png)
 
 ## 聲明
-- 介接 API 來自 The F2E - 前端修煉精神時光屋
-- UI 設計圖稿來自 The F2E - 前端修煉精神時光屋（設計師：Penny）
+- 介接 API 來自 The F2E 2nd
+- UI 設計圖稿來自 The F2E 2nd（設計師：Penny）
 - 本作品內圖片、內容等，純粹為個人練習使用，不做任何商業用途
