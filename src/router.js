@@ -8,17 +8,24 @@ Vue.use(VueRouter);
 
 const routes = [
 	{
+		name: 'Index',
 		path: '/',
 		component: Index,
 	},
 	{
+		name: 'Room-intro',
 		path: '/room-intro',
 		component: RoomIntro,
 		children: [
 			{
+				name: 'Room',
 				path: ':id',
 			},
 		],
+	},
+	{
+		path: '*',
+		redirect: '/',
 	},
 ];
 
