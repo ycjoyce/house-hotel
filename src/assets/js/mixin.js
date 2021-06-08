@@ -12,10 +12,10 @@ export default {
 	},
 	computed: {
 		selectedDateStart() {
-			return this.$store.state.selectDate.start;
+			return this.$store.state.selectedDate.start;
 		},
 		selectedDateEnd() {
-			return this.$store.state.selectDate.end;
+			return this.$store.state.selectedDate.end;
 		},
 		normalDayPrice() {
 			return this.$store.state.curRoomDetail.normalDayPrice;
@@ -119,7 +119,7 @@ export default {
 					nextDay = new Date(nextDay).toLocaleDateString();
 					return nextDay;
 				}
-				return this.$store.state.selectDate[type];
+				return this.$store.state.selectedDate[type];
 			};
 		},
 	},

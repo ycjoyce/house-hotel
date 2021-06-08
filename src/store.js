@@ -12,7 +12,7 @@ const store = new Vuex.Store({
 	state: {
 		curRoomDetail: null,
 		curRoomBooked: [],
-		selectDate: {
+		selectedDate: {
 			start: null,
 			end: null,
 		},
@@ -35,6 +35,17 @@ const store = new Vuex.Store({
 				return state.sliderIndex[targetIndex].index;
 			};
 		},
+		disabledDate(state) {
+			return state.curRoomBooked.map((item) => item.date).map((item) => (
+				item.split('-').map((e) => {
+					let res = e;
+					if (e.startsWith('0')) {
+						res = e.substr(1);
+					}
+					return res;
+				}).join('/')
+			));
+		},
 	},
 	mutations: {
 		setCurRoomDetail(state, data) {
@@ -46,42 +57,13 @@ const store = new Vuex.Store({
 		addCurRoomBooked(state, data) {
 			state.curRoomBooked = state.curRoomBooked.concat(data);
 		},
-		setSelectDate(state, date) {
-			if (!date) {
-				state.selectDate.start = null;
-				state.selectDate.end = null;
+		setSelectDate(state, data) {
+			if (!data) {
+				state.selectedDate.start = null;
+				state.selectedDate.end = null;
 				return;
 			}
-
-			const selectStart = new Date(state.selectDate.start);
-			const curSelect = new Date(date);
-
-			if (!state.selectDate.start || (state.selectDate.start && state.selectDate.end)) {
-				state.selectDate.start = date;
-				state.selectDate.end = null;
-				return;
-			}
-
-			const selectedDates = getDateArr(state.selectDate.start, date);
-			const bookedDates = state.curRoomBooked.map((book) => book.date);
-			const result = selectedDates.map((selectedDate) => (
-				bookedDates.includes(formattedDateStr(selectedDate))
-			));
-
-			if (result.includes(true)) {
-				state.selectDate.end = null;
-				state.selectDate.start = date;
-				return;
-			}
-
-			if (curSelect > selectStart) {
-				state.selectDate.end = date;
-			} else if (curSelect < selectStart) {
-				state.selectDate.end = state.selectDate.start;
-				state.selectDate.start = date;
-			} else {
-				state.selectDate.end = null;
-			}
+			state.selectedDate = data;
 		},
 		setSliderIndex(state, data) {
 			const existIndex = state.sliderIndex.findIndex((item) => item.id === data.id);

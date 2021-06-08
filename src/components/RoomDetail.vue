@@ -43,9 +43,19 @@
         class="section"
       />
 
-      <calendar-container
-        :config="calendarConfig"
-      />
+      <div>
+        <p class="calendar-box-title">
+          空房狀態查詢
+        </p>
+        <calendar-container
+          lang="eng"
+          :limit-arange="90"
+          :multi-calendar="true"
+          :reset="true"
+          :disabled-date="$store.getters.disabledDate"
+          @getCalendarDate="setCalendarDate"
+        />
+      </div>
     </main>
 
     <div
@@ -187,6 +197,11 @@ export default {
     },
     amenities() {
       return this.$store.state.curRoomDetail.amenities;
+    },
+  },
+  methods: {
+    setCalendarDate(data) {
+      this.$store.commit('setSelectDate', data);
     },
   },
 }

@@ -5,6 +5,12 @@
     <slot></slot>
 
     <calendar-container
+      lang="eng"
+      :limit-arange="90"
+      :multi-calendar="true"
+      :reset="false"
+      :disabled-date="$store.getters.disabledDate"
+      @getCalendarDate="setCalendarDate"
       v-show="$store.state.showCalendar"
       :style="{ top: `${$store.state.showCalendar}px` }"
       @mouseleave.native="closeCalendar"
@@ -77,6 +83,9 @@ export default {
     };
   },
   methods: {
+    setCalendarDate(data) {
+      this.$store.commit('setSelectDate', data);
+    },
     closeCalendar() {
       this.$store.commit('toggleCalendar', false);
     },
@@ -84,7 +93,7 @@ export default {
       let allData = [];
       allData = allData.concat(this.$store.state.inputData);
 
-      for (let item in this.$store.state.selectDate) {
+      for (let item in this.$store.state.selectedDate) {
         const title = item === 'start' ? '入住日期' : '退房日期';
         const value = this.dateDefaultVal(title);
 
