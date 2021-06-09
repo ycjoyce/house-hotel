@@ -6,6 +6,8 @@
 
     <light-box
       v-show="showModal('lightBox')"
+      :images="lightBoxImages"
+      @close="closeLightBox"
     />
 
     <price-info
@@ -42,7 +44,21 @@ export default {
     showModal() {
       return (type) => (
         this.$store.state.modalStatus[type]
-      )
+      );
+    },
+    lightBoxImages() {
+      if (this.$store.state.curRoomDetail) {
+        return this.$store.state.curRoomDetail.imageUrl;
+      }
+      return [];
+    },
+  },
+  methods: {
+    closeLightBox() {
+      this.$store.commit('toggleModalStatus', {
+        type: 'lightBox',
+        status: false,
+      });
     },
   },
   created() {

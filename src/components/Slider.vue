@@ -22,8 +22,6 @@
 export default {
 	props: {
 		images: Array,
-		period: Number,
-		autoplay: Boolean,
 		curIndex: Number,
 	},
 };

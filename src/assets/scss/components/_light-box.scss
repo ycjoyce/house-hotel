@@ -1,12 +1,11 @@
 .light-box {
   @extend %modal-layout;
   background-color: rgba(0, 0, 0, .5);
-  justify-content: space-between;
-  padding: $layout-padding;
+  justify-content: space-around;
 
-  &-img {
-    max-width: 80vh;
-    max-height: 80vh;
+  &-inner {
+    width: 80%;
+    height: 80%;
   }
 
   &-prev, &-next {

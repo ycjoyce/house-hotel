@@ -1,61 +1,59 @@
 <template>
-  <div
-    v-if="$store.state.curRoomDetail"
-    class="light-box"
-    @click.self="closeLightBox"
-  >
-    <button
-      class="btn btn-pure btn-prev light-box-prev"
-      @click="changeImg('prev')"
-      :disabled="curIndex === 0"
-    ></button>
+    <div
+			class="light-box"
+			@click="closeLightBox($event)"
+		>
+			<button
+				class="btn btn-pure btn-prev light-box-prev"
+				@click="curIndex -= 1"
+				:disabled="curIndex === 0"
+			></button>
 
-    <div class="light-box-inner">
-      <img
-        class="light-box-img"
-        :src="roomImages[curIndex]"
-      >
+			<div class="light-box-inner">
+				<slider
+          class="slider-no-stretch"
+					:images="images"
+					:curIndex="curIndex"
+				/>
+			</div>
+
+			<button
+				class="btn btn-pure btn-next light-box-next"
+				@click="curIndex += 1"
+				:disabled="curIndex === images.length - 1"
+			></button>
     </div>
-
-    <button
-      class="btn btn-pure btn-next light-box-next"
-      @click="changeImg('next')"
-      :disabled="curIndex === roomImages.length - 1"
-    ></button>
-  </div>
 </template>
 
 <script>
+import Slider from '@src/components/Slider.vue';
+
 export default {
-  data() {
-    return {
-      curIndex: 0,
-    };
-  },
-  computed: {
-    roomImages() {
-      return this.$store.state.curRoomDetail.imageUrl;
-    },
-  },
-  methods: {
-    changeImg(direction) {
-      switch (direction) {
-        case 'prev':
-          this.curIndex--;
-          break;
-        case 'next':
-          this.curIndex++;
-          break;
-        default:
-          break;
+	components: {
+		Slider,
+	},
+	props: {
+		images: {
+			type: Array,
+			default: () => [],
+		},
+	},
+	data() {
+		return {
+			curIndex: 0,
+		};
+	},
+	methods: {
+		closeLightBox(e) {
+      const { target } = e;
+      const btnPrev = target.matches('.light-box-prev');
+      const btnNext = target.matches('.light-box-next');
+      const sliderImg = target.matches('.slider-img');
+      if (btnPrev || btnNext || sliderImg) {
+        return;
       }
-    },
-    closeLightBox() {
-      this.$store.commit('toggleModalStatus', {
-        type: 'lightBox',
-        status: false,
-      });
-    },
-  },
-}
+			this.$emit('close');
+		},
+	},
+};
 </script>

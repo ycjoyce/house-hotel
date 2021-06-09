@@ -63,7 +63,7 @@ export default {
   },
   mounted() {
     this.dotsEl = this.$refs['slider-box'].$children.find((child) => (
-      child.$el.classList.contains('slider-dots')
+      child.$el.matches('.slider-dots')
     )).$el;
     this.asideEl = this.$refs['hotel-info'].$el;
     if (this.dotsEl) {

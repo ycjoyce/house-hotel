@@ -1,8 +1,8 @@
 <template>
   <div class="amenity-box">
     <amenity-icon
-      v-for="(value, name, index) in amenities"
-      :key="`amenity-${index}`"
+      v-for="(value, name) in amenities"
+      :key="`${name}-${value}`"
       :amenity="{ name, value }"
     />
   </div>
