@@ -25,27 +25,11 @@
         HOUSE@HOTEL.COM
       </li>
     </ul>  
-
-    <slider-dots
-      :id="slider.id"
-      :amount="slider.amount"
-    />
   </aside>
 </template>
 
 <script>
-import SliderDots from '@src/components/SliderDots.vue';
-
 export default {
-  components: {
-    SliderDots,
-  },
-  props: {
-    slider: {
-      type: Object,
-      required: true,
-    },
-  },
   data() {
     return {
       hotelLogo: require('@img/house-logo.svg'),

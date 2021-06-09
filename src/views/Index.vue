@@ -1,11 +1,17 @@
 <template>
   <div class="flex-container">
+    <slider-box
+      ref="slider-box"
+      class="pos-index"
+      :images="sliderImages"
+      :period="5"
+      :autoplay="true"
+      :dots-left="sliderDotsLeft"
+    />
+    
     <hotel-info
       class="flex-aside-sm"
-      :slider="{
-        id: sliderId,
-        amount: sliderImages.length,
-      }"
+      ref="hotel-info"
     />
 
     <room-cards
@@ -13,18 +19,11 @@
       v-if="allRooms"
       :rooms="allRooms"
     />
-
-    <slider
-      :images="sliderImages"
-      :period="5"
-      :id="sliderId"
-      class="pos-index"
-    ></slider>
   </div>
 </template>
 
 <script>
-import Slider from '@src/components/Slider.vue';
+import SliderBox from '@src/components/SliderBox.vue';
 import HotelInfo from '@src/components/HotelInfo.vue';
 import RoomCards from '@src/components/RoomCards.vue';
 
@@ -32,7 +31,7 @@ import { getAllRooms } from '@src/assets/js/getData';
 
 export default {
   components: {
-    Slider,
+    SliderBox,
     HotelInfo,
     RoomCards,
   },
@@ -45,15 +44,37 @@ export default {
         require('@img/house-3.jpeg'),
         require('@img/house-4.jpeg'),
       ],
-      sliderId: Date.now(),
+      sliderDotsLeft: '',
+      dotsEl: null,
+      asideEl: null,
     };
+  },
+  methods: {
+    setDotsPos() {
+      const dotsWidth = this.dotsEl.offsetWidth;
+      const asideWidth = this.asideEl.offsetWidth;
+      this.sliderDotsLeft = `${(asideWidth - dotsWidth) / 2}px`;
+    },
   },
   created() {
     getAllRooms().then((res) => {
       this.allRooms = res.data.items;
     });
-
-    this.$store.dispatch('initSlider', this.sliderId);
+  },
+  mounted() {
+    this.dotsEl = this.$refs['slider-box'].$children.find((child) => (
+      child.$el.classList.contains('slider-dots')
+    )).$el;
+    this.asideEl = this.$refs['hotel-info'].$el;
+    if (this.dotsEl) {
+      this.setDotsPos();
+      window.addEventListener('resize', this.setDotsPos);
+    }
+  },
+  beforeDestroy() {
+    if (this.dotsEl) {
+      window.removeEventListener('resize', this.setDotsPos);
+    }
   },
 }
 </script>

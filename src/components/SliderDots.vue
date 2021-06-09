@@ -1,10 +1,13 @@
 <template>
-  <ol class="slider-dots">
+	<ol
+    class="slider-dots"
+    :style="[{ left: dotsLeft }, transform]"
+  >
     <li
       v-for="n in amount"
-      :key="`slider-dot-${n}`"
+      :key="n"
       class="slider-dot"
-      :class="{ active: curSlide(n - 1) }"
+      :class="{ active: n - 1 === curIndex }"
       @click="slideImage(n - 1)"
     ></li>
   </ol>
@@ -12,30 +15,23 @@
 
 <script>
 export default {
-  props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-    amount: {
-      type: Number,
-      required: true,
-    },
+	props: {
+		amount: Number,
+    curIndex: Number,
+    dotsLeft: String,
   },
   computed: {
-    curSlide() {
-      return (index) => (
-        index === this.$store.getters.sliderIndex(this.id)
-      )
+    transform() {
+      if (this.dotsLeft) {
+        return { transform: 'translateX(0)' };
+      }
+      return {};
     },
   },
-  methods: {
-    slideImage(index) {
-      this.$store.commit('setSliderIndex', {
-        id: this.id,
-        index,
-      });
-    },
+	methods: {
+		slideImage(index) {
+			this.$emit('changeSlideIndex', index);
+		},
   },
-}
+};
 </script>

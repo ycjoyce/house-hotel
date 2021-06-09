@@ -16,7 +16,6 @@ const store = new Vuex.Store({
 			start: null,
 			end: null,
 		},
-		sliderIndex: [],
 		modalStatus: {
 			lightBox: false,
 			reservePop: false,
@@ -29,12 +28,6 @@ const store = new Vuex.Store({
 		},
 	},
 	getters: {
-		sliderIndex(state) {
-			return (id) => {
-				const targetIndex = state.sliderIndex.findIndex((item) => item.id === id);
-				return state.sliderIndex[targetIndex].index;
-			};
-		},
 		disabledDate(state) {
 			return state.curRoomBooked.map((item) => item.date).map((item) => (
 				item.split('-').map((e) => {
@@ -64,14 +57,6 @@ const store = new Vuex.Store({
 				return;
 			}
 			state.selectedDate = data;
-		},
-		setSliderIndex(state, data) {
-			const existIndex = state.sliderIndex.findIndex((item) => item.id === data.id);
-			if (existIndex > -1) {
-				state.sliderIndex.splice(existIndex, 1, data);
-			} else {
-				state.sliderIndex.push(data);
-			}
 		},
 		toggleModalStatus(state, { type, status }) {
 			state.modalStatus[type] = status;
@@ -103,12 +88,6 @@ const store = new Vuex.Store({
 		},
 	},
 	actions: {
-		initSlider({ commit }, id) {
-			commit('setSliderIndex', {
-				id,
-				index: 0,
-			});
-		},
 		initAllData({ commit }) {
 			commit('setSelectDate', false);
 			commit('getInputData', false);

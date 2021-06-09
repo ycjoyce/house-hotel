@@ -2,57 +2,75 @@
   display: flex;
   width: 100%;
   height: 100%;
+  transition: all .5s;
+}
 
-  &-container {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    
-    &.pos-index {
+.slider-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  &.pos-index {
+    min-width: $window-width;
+    position: absolute;
+
+    .slider-container {
       @include slider-bg-overlay(rgba(0, 0, 0, 0.6));
-      min-width: $window-width;
     }
+  }
 
-    &.pos-intro {
+  &.pos-intro {
+    .slider-container {
       @include slider-bg-overlay(rgba(255, 255, 255, 0.6));
     }
   }
+}
 
-  &-img-box {
-    flex: 1 0 100%;
-    overflow: hidden;
-    transition: all .5s;
-  }
+.slider-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
-  &-img {
-    @extend %cover-img;
-  }
+.slider-img-box {
+  flex: 1 0 100%;
+  overflow: hidden;
+}
 
-  &-dots {
-    &.colored {
-      .slider-dot {
-        border: 1px solid $opacity-color-primary;
+.slider-img {
+  @extend %cover-img;
+}
 
-        &.active {
-          background-color: $opacity-color-primary;
-        }
+.slider-dots {
+  position: absolute;
+  z-index: 2;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  &.colored {
+    .slider-dot {
+      border: 1px solid $opacity-color-primary;
+
+      &.active {
+        background-color: $opacity-color-primary;
       }
     }
   }
+}
 
-  &-dot {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 100%;
-    border: 1px solid #fff;
-    cursor: pointer;
-    &:not(:last-child) {
-      margin-right: 10px;
-    }
+.slider-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  border: 1px solid #fff;
+  cursor: pointer;
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
 
-    &.active {
-      background-color: #fff;
-    }
+  &.active {
+    background-color: #fff;
   }
 }
