@@ -40,13 +40,6 @@ export default {
         type: 'reservePop',
         status: false,
       });
-      if (this.$store.state.popContent.type === 'Editting') {
-        return;
-      }
-      this.$store.commit('setPopContent', {
-        type: 'Editting',
-      });
-      this.$store.dispatch('initAllData');
     },
   },
 }

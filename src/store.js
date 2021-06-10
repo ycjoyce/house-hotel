@@ -1,9 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {
-	formattedDateStr,
-	getDateArr,
-} from '@src/assets/js/util';
 
 Vue.use(Vuex);
 
@@ -21,7 +17,6 @@ const store = new Vuex.Store({
 			reservePop: false,
 		},
 		showCalendar: false,
-		inputData: [],
 		popContent: {
 			type: 'Editting',
 			status: null,
@@ -37,6 +32,8 @@ const store = new Vuex.Store({
 					}
 					return res;
 				}).join('/')
+			)).filter((date) => (
+				new Date(date) >= new Date()
 			));
 		},
 	},
@@ -68,29 +65,9 @@ const store = new Vuex.Store({
 			}
 			state.showCalendar = data;
 		},
-		getInputData(state, data) {
-			if (!data) {
-				state.inputData.splice(0);
-				return;
-			}
-			const targetIndex = state.inputData.findIndex((item) => (
-				item.type === data.type && item.title === data.title
-			));
-			if (targetIndex > -1) {
-				state.inputData.splice(targetIndex, 1, data);
-				return;
-			}
-			state.inputData.push(data);
-		},
 		setPopContent(state, { type, status = null }) {
 			state.popContent.type = type;
 			state.popContent.status = status;
-		},
-	},
-	actions: {
-		initAllData({ commit }) {
-			commit('setSelectDate', false);
-			commit('getInputData', false);
 		},
 	},
 });

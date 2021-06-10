@@ -6,6 +6,10 @@
   font-size: 1rem;
   line-height: map-get($map: $line-height, $key: normal);
 
+  [disabled] {
+    cursor: not-allowed;
+  }
+
   $types: primary secondary;
 
   &-pure {

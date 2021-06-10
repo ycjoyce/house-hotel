@@ -1,10 +1,6 @@
 <template>
   <div>
-    <label
-      class="form-control"
-      v-for="(title, index) in data.value"
-      :key="`form-control-${index}`"
-    >
+    <label class="form-control">
       <p class="form-control-title">
         {{title}}
       </p>
@@ -12,67 +8,79 @@
       <input
         maxlength="10"
         class="form-control-input"
-        :class="{ 'input-date': data.name === 'date' }"
-        :readonly="data.name === 'date'"
-        :type="inputType"
-        :value="inputVal(data.name, title)"
-        @change="emitVal(data.name, title)"
-        @click="openCalendar(data.name)"
+        :class="{ 'input-date': type === 'date' }"
+        :readonly="type === 'date'"
+        :type="type === 'tel' ? 'tel' : 'text'"
+        :data-title="title"
+        :value="inputVal"
+        @change="emitVal($event)"
+        @click="openCalendar($event)"
       >
     </label>
+
+    <calendar-container
+      v-if="type === 'date'"
+      v-show="calendarOpened === title"
+      :style="{ top: `${calendarPos}px` }"
+      lang="eng"
+      :limit-arange="90"
+      :multi-calendar="true"
+      :reset="false"
+      :disabled-date="$store.getters.disabledDate"
+      @getCalendarDate="setCalendarDate"
+    />
   </div>
 </template>
 
 <script>
 import mixin from '@src/assets/js/mixin';
+import CalendarContainer from '@src/components/CalendarContainer.vue';
 
 export default {
   mixins: [mixin],
+  components: {
+    CalendarContainer,
+  },
   props: {
-    data: {
-      type: Object,
-      required: true,
-    },
+    type: String,
+    title: String,
+    calendarOpened: String,
+    value: String,
   },
   data() {
     return {
       calendarToOpen: null,
+      inputVal: '',
+      calendarPos: false,
     };
   },
-  computed: {
-    inputType() {
-      return this.data.name === 'tel' ? 'tel' : 'text';
-    },
-    inputVal() {
-      return (name, title) => {
-        if (name !== 'date') {
-          const targetIndex = this.$store.state.inputData.findIndex((item) => item.title === title);
-          return targetIndex > -1 ? this.$store.state.inputData[targetIndex].value : '';
-        }
-        return this.dateDefaultVal(title);
-      }
-    },
-  },
   methods: {
-    emitVal(name, title) {
-      if (name === 'tel' && !this.checkTel(window.event.target.value).status) {
-        alert(this.checkTel(window.event.target.value).msg);
-        window.event.target.value = '';
+    setCalendarDate(data) {
+      this.$store.commit('setSelectDate', data);
+    },
+    emitVal(e) {
+      this.inputVal = e.target.value;
+      
+      if (!this.inputVal) {
         return;
       }
-      const value = window.event.target.value.trim();
-      if (!value) {
+      
+      if (this.type === 'tel' && !this.checkTel(this.inputVal).status) {
+        alert(this.checkTel(this.inputVal).msg);
+        this.inputVal = '';
         return;
       }
+
       const val = {
-        type: name,
-        title,
-        value: window.event.target.value,
+        type: this.type,
+        title: this.title,
+        value: this.inputVal,
       };
-      this.$store.commit('getInputData', val);
+
+      this.$emit('getInputData', val);
     },
     checkTel(val) {
-      const reg = /^09([0-9]{2})-?([0-9]{3})-?([0-9]{3})$/;
+      const reg = /^09([0-9]{2})([0-9]{3})([0-9]{3})$/;
       if(reg.test(val)){
         return {
           status: true,
@@ -83,14 +91,31 @@ export default {
         msg:'請輸入正確行動電話',
       };
     },
-    openCalendar(name) {
-      if (name !== 'date') {
+    openCalendar(e) {
+      if (this.type !== 'date') {
         return;
       }
-      const top = window.event.target.parentNode.offsetTop;
-      const height = window.event.target.parentNode.offsetHeight;
-      this.$store.commit('toggleCalendar', top + height);
+      const top = e.target.parentNode.offsetTop;
+      const height = e.target.parentNode.offsetHeight;
+      this.calendarPos = top + height;
+      this.$emit('calendarOpened', this.title);
     },
+  },
+  watch: {
+    value(val) {
+      this.inputVal = val;
+      const sendVal = {
+        type: this.type,
+        title: this.title,
+        value: this.inputVal,
+      };
+      this.$emit('getInputData', sendVal);
+    },
+  },
+  created() {
+    if (this.value) {
+      this.inputVal = this.value;
+    }
   },
 }
 </script>
