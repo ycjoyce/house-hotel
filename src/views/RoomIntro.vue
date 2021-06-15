@@ -69,5 +69,9 @@ export default {
       this.$store.commit('setCurRoomBooked', res.data.booking);
     });
   },
+  beforeRouteLeave(to, from, next) {
+    this.$store.commit('setSelectDate', null);
+    next();
+  },
 }
 </script>

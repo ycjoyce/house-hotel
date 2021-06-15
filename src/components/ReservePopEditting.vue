@@ -1,14 +1,9 @@
 <template>
-  <div
-    class="flex-container"
-    @click="closeCalendar($event)"
-  >
+  <div class="flex-container">
     <slot></slot>
 
     <edit-panel
       class="reserve-edit flex-aside-sm"
-      @calendarOpened="setCalendarOpened"
-      :calendarOpened="calendarOpened"
     />
 
     <room-detail
@@ -26,24 +21,6 @@ export default {
   components: {
     EditPanel,
     RoomDetail,
-  },
-  data() {
-    return {
-      calendarOpened: null,
-    };
-  },
-  methods: {
-    setCalendarOpened(status) {
-      this.calendarOpened = status;
-    },
-    closeCalendar(e) {
-      const target = e.target;
-      const input = target.matches(`.input-date[data-title="${this.calendarOpened}"]`);
-      const calendar = target.closest('.calendar-container');
-      if (!input && !calendar) {
-        this.calendarOpened = null;
-      }
-    },
   },
 }
 </script>

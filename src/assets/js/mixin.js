@@ -119,6 +119,9 @@ export default {
 					nextDay = new Date(nextDay).toLocaleDateString();
 					return nextDay;
 				}
+				if (this.checkBooked(this.selectedDateStart)) {
+					return '';
+				}
 				return this.$store.state.selectedDate[type];
 			};
 		},

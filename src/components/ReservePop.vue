@@ -40,6 +40,10 @@ export default {
         type: 'reservePop',
         status: false,
       });
+      this.$store.commit('setPopContent', {
+        type: 'Editting',
+        status: null,
+      });
     },
   },
 }

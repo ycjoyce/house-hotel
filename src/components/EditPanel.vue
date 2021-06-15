@@ -4,13 +4,13 @@
     v-if="$store.state.curRoomDetail"
   >
     <form-control
-      v-for="{ type, title } in inputs"
-      :key="title"
-      :type="type"
-      :title="title"
-      :calendarOpened="calendarOpened"
-      :value="formCtrlVal(type, title)"
-      @calendarOpened="emitCalendarOpened"
+      v-for="input in inputs"
+      :key="input.title"
+      :type="input.type"
+      :title="input.title"
+      :start-only="input.startOnly"
+      :default-value="input.type !== 'date' ? input.defaultValue : defaultDate"
+      :disabled-date="$store.getters.disabledDate"
       @getInputData="getInputData"
     />
 
@@ -56,7 +56,6 @@
 <script>
 import mixin from '@src/assets/js/mixin';
 import { reserveRoom } from '@src/assets/js/getData';
-
 import FormControl from '@src/components/FormControl.vue';
 import SolidBtn from '@src/components/SolidBtn.vue';
 
@@ -65,9 +64,6 @@ export default {
   components: {
     FormControl,
     SolidBtn,
-  },
-  props: {
-    calendarOpened: String,
   },
   data() {
     return {
@@ -83,11 +79,7 @@ export default {
         },
         {
           type: 'date',
-          title: '入住日期',
-        },
-        {
-          type: 'date',
-          title: '退房日期',
+          title: '入住期間',
         },
       ],
       btns: [
@@ -109,13 +101,8 @@ export default {
     };
   },
   computed: {
-    formCtrlVal() {
-      return (type, title) => {
-        if (type !== 'date') {
-          return;
-        }
-        return this.dateDefaultVal(title);
-      };
+    defaultDate() {
+      return `${this.dateDefaultVal('入住日期')}-${this.dateDefaultVal('退房日期')}`;
     },
   },
   methods: {
@@ -124,28 +111,45 @@ export default {
 				this.inputData.splice(0);
 				return;
       }
+
+      let dataCloned = JSON.parse(JSON.stringify(data));
+      let { title, type, value } = dataCloned;
+
+      if (title === '入住期間') {
+        if (value.start && !value.end) {
+          dataCloned.value.end = new Date(new Date(value.start).getTime() + this.dayDistance).toLocaleDateString();
+        }
+        this.$store.commit('setSelectDate', dataCloned.value);
+      }
       
 			const targetIndex = this.inputData.findIndex((item) => (
-				item.type === data.type && item.title === data.title
+				item.type === type && item.title === title
       ));
       
 			if (targetIndex > -1) {
-				this.inputData.splice(targetIndex, 1, data);
+				this.inputData.splice(targetIndex, 1, dataCloned);
 				return;
       }
       
-			this.inputData.push(data);
-    },
-    emitCalendarOpened(title) {
-      this.$emit('calendarOpened', title);
+			this.inputData.push(dataCloned);
     },
     sendReserve() {
       this.disabledBtns.push('確認送出');
 
       const name = this.inputData.find((item) => item.title === '姓名').value;
       const tel = this.inputData.find((item) => item.title === '手機號碼').value;
-      const startDateStr = this.inputData.find((item) => item.title === '入住日期').value;
-      const endDateStr = this.inputData.find((item) => item.title === '退房日期').value;
+      const startDateStr = this.inputData.find((item) => item.title === '入住期間').value.start;
+      const endDateStr = this.inputData.find((item) => item.title === '入住期間').value.end;
+
+      if (!startDateStr || !endDateStr) {
+        alert('請選擇完整入住期間（包含入住及退房日期）');
+        this.disabledBtns.splice(
+          this.disabledBtns.findIndex((btn) => btn === '確認送出'),
+          1,
+        );
+        return;
+      }
+
       const dateArr = this.getDateArr(startDateStr, endDateStr);
       const param = {
         name,
