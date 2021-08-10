@@ -31,7 +31,7 @@ const routes = [
 
 const router = new VueRouter({
 	mode: 'history',
-	base: '/house-hotel/',
+	base: process.env.NODE_ENV === 'production' ? '/house-hotel/' : '/',
 	routes,
 });
 
