@@ -2,7 +2,7 @@
   <aside class="hotel-info">
     <div class="hotel-info-logo-box">
       <img
-        :src="hotelLogo"
+        :src="require('@img/house-logo.svg')"
         alt="好室House Hotel"
         class="hotel-info-logo"
       >
@@ -27,13 +27,3 @@
     </ul>  
   </aside>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      hotelLogo: require('@img/house-logo.svg'),
-    };
-  },
-}
-</script>

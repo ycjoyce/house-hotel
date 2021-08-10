@@ -2,6 +2,7 @@
   <form
     class="edit-panel"
     v-if="$store.state.curRoomDetail"
+    @submit.prevent="submitHandler"
   >
     <form-control
       v-for="input in inputs"
@@ -69,35 +70,18 @@ export default {
     return {
       inputData: [],
       inputs : [
-        {
-          type: 'text',
-          title: '姓名',
-        },
-        {
-          type: 'tel',
-          title: '手機號碼',
-        },
-        {
-          type: 'date',
-          title: '入住期間',
-        },
+        { type: 'text', title: '姓名' },
+        { type: 'tel', title: '手機號碼' },
+        { type: 'date', title: '入住期間' },
       ],
       btns: [
         {
           title: '確認送出',
-          method: () => {
-            if (this.inputData.length < this.inputs.length) {
-              alert('請填寫完整資料');
-              return;
-            }
-            this.sendReserve();
-          },
+          method: () => this.checkAndSendReq(),
         },
       ],
       disabledBtns: [],
-      explanations: [
-        '此預約系統僅預約功能，並不會對您進行收費',
-      ],
+      explanations: ['此預約系統僅預約功能，並不會對您進行收費'],
     };
   },
   computed: {
@@ -106,6 +90,20 @@ export default {
     },
   },
   methods: {
+    checkAndSendReq() {
+      if (this.inputData.length < this.inputs.length) {
+        alert('請填寫完整資料');
+        return;
+      }
+      this.sendReserve();
+    },
+    submitHandler() {
+      const title = '確認送出';
+      if (this.disabledBtns.includes(title)) {
+        return;
+      }
+      this.checkAndSendReq();
+    },
     getInputData(data) {
       if (!data) {
 				this.inputData.splice(0);

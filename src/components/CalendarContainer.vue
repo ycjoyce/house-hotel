@@ -2,6 +2,7 @@
   <div class="calendar-container">
     <div class="calendar-box">
       <button
+				type="button"
         class="btn btn-pure btn-prev"
         @click="changeCalendar('prev')"
       ></button>
@@ -19,6 +20,7 @@
       />
 
       <button
+				type="button"
         class="btn btn-pure btn-next"
         @click="changeCalendar('next')"
       ></button>
@@ -77,9 +79,7 @@ export default {
 	computed: {
 		calendars() {
 			const { month, year } = this.showDate;
-			const calendars = [
-				{ month, year },
-			];
+			const calendars = [{ month, year }];
 			if (this.multiCalendar) {
 				calendars.push({
 					month: month + 1 > 12 ? 1 : month + 1,
@@ -145,10 +145,7 @@ export default {
 				const start = selectStart < curSelect ? selectStart : curSelect;
 				const end = start === selectStart ? curSelect : selectStart;
 				const targetDate = new Date(item);
-				if (targetDate > start && targetDate < end) {
-					return true;
-				}
-				return false;
+				return targetDate > start && targetDate < end;
 			});
 
 			if (reSelectStart || containDisabled) {
