@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import mixin from '@src/assets/js/mixin';
+import mixin from '@src/mixins/mixin';
 
 import SliderBox from '@src/components/SliderBox.vue';
 import SolidBtn from '@src/components/SolidBtn.vue';

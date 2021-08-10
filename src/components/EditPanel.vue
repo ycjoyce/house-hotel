@@ -54,8 +54,8 @@
 </template>
 
 <script>
-import mixin from '@src/assets/js/mixin';
-import { reserveRoom } from '@src/assets/js/getData';
+import mixin from '@src/mixins/mixin';
+import { reserveRoom } from '@src/apis/getData';
 import FormControl from '@src/components/FormControl.vue';
 import SolidBtn from '@src/components/SolidBtn.vue';
 

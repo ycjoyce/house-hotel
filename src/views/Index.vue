@@ -27,7 +27,7 @@ import SliderBox from '@src/components/SliderBox.vue';
 import HotelInfo from '@src/components/HotelInfo.vue';
 import RoomCards from '@src/components/RoomCards.vue';
 
-import { getAllRooms } from '@src/assets/js/getData';
+import { getAllRooms } from '@src/apis/getData';
 
 export default {
   components: {

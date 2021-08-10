@@ -35,7 +35,7 @@
 
 <script>
 import CalendarContainer from '@src/components/CalendarContainer.vue';
-import clickOutside from '@src/assets/js/clickOutside';
+import clickOutside from '@src/directives/clickOutside';
 
 export default {
 	components: {

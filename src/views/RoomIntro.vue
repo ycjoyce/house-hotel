@@ -26,7 +26,7 @@ import RoomDetail from '@src/components/RoomDetail.vue';
 import LightBox from '@src/components/LightBox.vue';
 import ReservePop from '@src/components/ReservePop.vue';
 
-import { getRoomDetail } from '@src/assets/js/getData';
+import { getRoomDetail } from '@src/apis/getData';
 
 export default {
   components: {

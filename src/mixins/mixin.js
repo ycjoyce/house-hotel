@@ -2,7 +2,7 @@ import {
 	formattedDateStr,
 	dayDistance,
 	getDateArr,
-} from '@src/assets/js/util';
+} from '@src/util';
 
 export default {
 	data() {
