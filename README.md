@@ -19,10 +19,9 @@
 
 ## 使用技術
 - Vue.js / Vuex / Vue Router
-- Webpack
 - Javascript (ES6+)
 - Ajax / Axios
-- OOCSS
+- Webpack
 - SCSS
 - ESLint (Airbnb)
 
